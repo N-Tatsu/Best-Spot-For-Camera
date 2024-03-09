@@ -38,7 +38,7 @@ Rails.application.routes.draw do
     get 'users/unsubscribe', as:'unsubscribe'
     patch 'users/withdraw', as:'withdraw'
     resources :post_images, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
-      resource :favorites, only: [:index, :create, :destroy]
+      resource :favorite, only: [:index, :create, :destroy]
       resources :post_comments, only: [:create, :destroy]
     end
   end

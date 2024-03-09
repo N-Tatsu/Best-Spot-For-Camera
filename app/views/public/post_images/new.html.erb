@@ -1,2 +1,15 @@
-<h1>Public::PostImages#new</h1>
-<p>Find me in app/views/public/post_images/new.html.erb</p>
+<h1><i class="fa-regular fa-image"></i>Post</h1>
+<div>
+  <%= flash.now[:alert] %>
+</div>
+
+<%= form_with model: @post_Image do |f| %>
+<h4>Picture</h4>
+<%= f.file_field :image,accept: "image/*" %>
+<h4>Caption</h4>
+<%= f.text_field :body %>
+<h4>Tag（「、」で区切ると複数タグを登録できます）</h4>
+<%= f.text_field :name %>
+<%= f.submit '投稿する' %>
+
+<% end %>
