@@ -38,12 +38,17 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     get 'homes/about', as:'about'
-    resources :users, only: [:index, :show, :edit, :update]
-      # member do
-      # いいねした一覧 usersにネストして
-      # get :liked_posts
     get 'users/unsubscribe', as:'unsubscribe'
     patch 'users/withdraw', as:'withdraw'
+    resources :users, only: [:index, :show, :edit, :update] do
+      member do #1つのデータに対して行う処理を定義することができる
+        get :liked_post_images
+      end
+    end
+      
+      # いいねした一覧 usersにネストして
+      # get :liked_posts
+    
     resources :post_images, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
       resource :favorite, only: [:index, :create, :destroy]
       resources :post_comments, only: [:create, :destroy]

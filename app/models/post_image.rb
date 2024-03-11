@@ -1,4 +1,10 @@
 class PostImage < ApplicationRecord
+    #バリデーション
+    validates :address, presence: true
+    geocoded_by :address
+    after_validation :geocode
+    
+    #関連付け
     has_one_attached :image
     belongs_to :user
     has_many :favorites, dependent: :destroy
@@ -7,15 +13,13 @@ class PostImage < ApplicationRecord
     # 中間テーブル"post_tag_relations"を通してアソシエーション
     has_many :tags, through: :post_tag_relations
     
-    validates :address, presence: true
-
-    geocoded_by :address
-    after_validation :geocode
+   
 
     # 引数で渡された”user_id”がFavoriteテーブルに存在するかどうか調べる
     def favorited_by?(user)
         favorites.exists?(user_id: user.id)
     end
+
 
     def save_tags(tags)
         # タグが存在していれば、タグの名前を配列として全て取得する
