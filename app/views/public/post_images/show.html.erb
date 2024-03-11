@@ -5,6 +5,7 @@
 <p>
   <%= image_tag @post_image.image, size: "200x200" %>
 </p>
+<!--いいねに関する記述-->
 <% if @post_image.favorited_by?(current_user) %>
     <p>
       <%= link_to post_image_favorite_path(@post_image), method: :delete do %>
@@ -19,6 +20,24 @@
     </p>
   <% end %>
 <!--コメントフォーム-->
+<div>
+  <p>コメント件数:<%= @post_image.post_comments.count %></p>
+  <% @post_image.post_comments.each do |post_comment| %>
+    <!--<p><%# image_tag post_comment.user.profile_image, size: "100x100" %></p>-->
+    <%= post_comment.user.name %>
+    <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
+    <% if @post_comment.user == current_user %>
+      <%= link_to "削除する", post_iamge_post_comment_path(@post_comment.post_image, @post_comment), method: :delete, data: { confirm: "削除してもよろしいですか？" }  %>
+    <% end %>
+  <% end %>
+</div>
+<div>
+  <%= form_with model: [@post_image,@post_comment] do |f| %>
+    <%= f.text_area :comment, row: '5', placeholder: "コメントする" %>
+    <%= f.submit "コメントを投稿する" %>
+  <% end %>
+</div>
+
 
 <p><%= @post_image.user.name %></p>
 <p><%= @post_image.body %></p>
@@ -29,5 +48,5 @@
 </p>
 <span><i class="fa-solid fa-location-dot"></i> <%= @post_image.address %></span>
 <p><%= link_to "編集する", edit_post_image_path %></p>
-<p><%= link_to "削除する", post_image_path(@post_image), method: :delete %></p>
+<p><%= link_to "削除する", post_image_path(@post_image), method: :delete, data: {confirm: "本当に削除しますか？"} %></p>
 

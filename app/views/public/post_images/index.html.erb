@@ -22,7 +22,7 @@
       <% end %>
     </p>
   <% end %>
-  <p>コメント数</p>
+  <p>コメント件数:<%= post_image.post_comments.count %></p>
   <p><%= link_to user_path(post_image.user_id) do %>
        <%= post_image.user.name %>
      <% end %>

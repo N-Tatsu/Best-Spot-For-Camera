@@ -28,6 +28,7 @@ class Public::PostImagesController < ApplicationController
       @post_image = PostImage.find(params[:id])
       @tag_list = @post_image.tags.pluck(:name).join(',')
       @post_image_tags = @post_image.tags
+      @post_comment = PostComment.new
   end
 
   def edit

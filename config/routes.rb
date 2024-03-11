@@ -42,12 +42,11 @@ Rails.application.routes.draw do
     patch 'users/withdraw', as:'withdraw'
     resources :users, only: [:index, :show, :edit, :update] do
       member do #1つのデータに対して行う処理を定義することができる
-        get :liked_post_images
+        # get :liked_post_images
+         # いいねした一覧 usersにネストして
+      # get :liked_posts
       end
     end
-      
-      # いいねした一覧 usersにネストして
-      # get :liked_posts
     
     resources :post_images, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
       resource :favorite, only: [:index, :create, :destroy]
