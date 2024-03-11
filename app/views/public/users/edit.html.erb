@@ -1,2 +1,15 @@
-<h1>Public::Users#edit</h1>
-<p>Find me in app/views/public/users/edit.html.erb</p>
+<h1>Eding Profile</h1>
+<%= form_with model: @user, url: user_path(@user.id), method: :patch do |f| %>
+  <%= f.label :image %>
+  <%= f.file_field :profile_image, accept: 'image/*' %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label :introduction%>
+  <%= f.text_field :introduction %>
+  <% if @user == current_user %>
+    <%= @user.email %>
+  <% end %>
+  <%= f.submit "変更を保存する" %>
+  <%= link_to "退会する", unsubscribe_path %>
+  
+<% end %>

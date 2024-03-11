@@ -31,7 +31,7 @@
         <%= link_to "ユーザー一覧", users_path %>
     </li>
     <li>
-        <%= link_to "マイページ", users_path(current_user) %>
+        <%= link_to "マイページ", user_path(current_user) %>
     </li>
     <li>
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
