@@ -1,2 +1,18 @@
-<h1>Public::PostImages#edit</h1>
-<p>Find me in app/views/public/post_images/edit.html.erb</p>
+<h1>Eding Picture</h1>
+<% flash.each do |message_type, message| %>
+  <div class="flash-message" <%= message_type %>><%= message %></div>
+<% end %>
+<%= form_with model: @post_image, url: post_image_path(@post_image), method: :patch do |f| %>
+  <h4>Picture</h4>
+  <%= f.file_field :image,accept: "image/*" %>
+  <h4>Caption</h4>
+  <%= f.text_field :body %>
+  <h4>Tag（「、」で区切ると複数タグを登録できます）</h4>
+  <%= f.text_field :name, class: 'form-control' %>
+  <%= text_field_tag :zipcode, nil, class: "form-control", placeholder: "郵便番号" %>
+  <%= f.text_field :address, class: "form-control", placeholder: "住所" %>
+  <%= f.submit '編集を保存する' %>
+  
+
+<%= javascript_pack_tag "jpostal",  'data-turbolinks-track': 'reload' %>
+<% end %>

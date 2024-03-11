@@ -2721,6 +2721,11 @@ dot-prop@^5.2.0:
   dependencies:
     is-obj "^2.0.0"
 
+dotenv@^16.4.5:
+  version "16.4.5"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.4.5.tgz#cdd3b3b604cb327e286b4762e13502f717cb099f"
+  integrity sha512-ZmdL2rui+eB2YwhsWzjInR8LldtZHGDoQ1ugH85ppHKwpUHL7j7rN0Ti9NCnGiQbhaZ11FpR+7ao1dNsmduNUg==
+
 duplexify@^3.4.2, duplexify@^3.6.0:
   version "3.7.1"
   resolved "https://registry.yarnpkg.com/duplexify/-/duplexify-3.7.1.tgz#2a4df5317f6ccfd91f86d6fd25d8d8a103b88309"
@@ -4108,6 +4113,11 @@ jest-worker@^26.5.0:
     "@types/node" "*"
     merge-stream "^2.0.0"
     supports-color "^7.0.0"
+
+jquery-jpostal-ja@^2.14.44:
+  version "2.14.44"
+  resolved "https://registry.yarnpkg.com/jquery-jpostal-ja/-/jquery-jpostal-ja-2.14.44.tgz#ff127b058abf2c2bd87e60e6f56b25dc356dd3dd"
+  integrity sha512-EoFuoJTyZ2p47lTDxAfJTZb+RezmJSRNTyU75rGyvC/rInATtDn7plSlzpYQCdD6ykw/51D883nQUrbwi8XUZw==
 
 jquery@^3.7.1:
   version "3.7.1"

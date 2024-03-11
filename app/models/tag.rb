@@ -3,5 +3,5 @@ class Tag < ApplicationRecord
   # 中間テーブル"post_tag_relations"を通してアソシエーション
   has_many :post_images, through: :post_tag_relations
   
-  validate :name, presence:true, length:{maximum:50}
+  validates :name, presence:true, length:{maximum:50}
 end

@@ -3,13 +3,19 @@
   <%= flash.now[:alert] %>
 </div>
 
-<%= form_with model: @post_Image do |f| %>
+<%= form_with model: @post_image, url: post_images_path, method: :post do |f| %>
 <h4>Picture</h4>
 <%= f.file_field :image,accept: "image/*" %>
 <h4>Caption</h4>
 <%= f.text_field :body %>
 <h4>Tag（「、」で区切ると複数タグを登録できます）</h4>
-<%= f.text_field :name %>
+<%= f.text_field :name, class: 'form-control' %>
+<%= text_field_tag :zipcode, nil, class: "form-control", placeholder: "郵便番号" %>
+<%= f.text_field :address, :zipcode, class: "form-control", placeholder: "住所" %>
 <%= f.submit '投稿する' %>
 
+<%= javascript_pack_tag "jpostal",  'data-turbolinks-track': 'reload' %>
+
 <% end %>
+
+

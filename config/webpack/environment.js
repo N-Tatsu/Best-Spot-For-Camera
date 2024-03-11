@@ -1,3 +1,6 @@
+// javascriptでも環境変数を読み込むため
+require("dotenv").config(); 
+
 const { environment } = require('@rails/webpacker')
 
 module.exports = environment

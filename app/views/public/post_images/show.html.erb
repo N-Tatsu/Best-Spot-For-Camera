@@ -1,2 +1,21 @@
-<h1>Public::PostImages#show</h1>
-<p>Find me in app/views/public/post_images/show.html.erb</p>
+<% flash.each do |message_type, message| %>
+  <div class="flash-message" <%= message_type %>><%= message %></div>
+<% end %>
+<h1>Showing</h1>
+<p>
+  <%= image_tag @post_image.image, size: "200x200" %>
+</p>
+<!--いいねボタンといいね数-->
+<!--コメントフォーム-->
+
+<p><%= @post_image.user.name %></p>
+<p><%= @post_image.body %></p>
+<p>
+  <% @post_image.tags.each do |tag| %>
+    <%= tag.name %>
+  <% end %>
+</p>
+<span><i class="fa-solid fa-location-dot"></i> <%= @post_image.address %></span>
+<p><%= link_to "編集する", edit_post_image_path %></p>
+<p><%= link_to "削除する", post_image_path(@post_image), method: :delete %></p>
+

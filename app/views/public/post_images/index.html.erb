@@ -1,2 +1,25 @@
-<h1>Public::PostImages#index</h1>
-<p>Find me in app/views/public/post_images/index.html.erb</p>
+<h1>Pictures</h1>
+<% flash.each do |message_type, message| %>
+  <div class="flash-message" <%= message_type %>><%= message %></div>
+<% end %>
+
+<% @post_images.each do |post_image| %>
+  <p>
+    <%= link_to post_image_path(post_image.id) do %>
+      <%= image_tag post_image.image, size: "300x300" %>
+    <% end %>
+  </p>
+  <p>いいね</p>
+  <p>コメント数</p>
+  <p><%= link_to user_path(post_image.user_id) do %>
+       <%= post_image.user.name %>
+     <% end %>
+  </p>
+  <p><%= post_image.body %></p>
+  <p>
+    <% post_image.tags.each do |tag| %>
+      <%= tag.name %>
+    <% end %>
+  </p>
+  <span><i class="fa-solid fa-location-dot"></i> <%= post_image.address %></span>
+<% end %>

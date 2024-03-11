@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_03_09_092857) do
+ActiveRecord::Schema.define(version: 2024_03_09_075355) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -71,8 +71,8 @@ ActiveRecord::Schema.define(version: 2024_03_09_092857) do
     t.integer "user_id", null: false
     t.string "body", null: false
     t.string "address", default: ""
-    t.float "latitude"
-    t.float "longitude"
+    t.float "latitude", default: 0.0
+    t.float "longitude", default: 0.0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -83,6 +83,8 @@ ActiveRecord::Schema.define(version: 2024_03_09_092857) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["post_image_id", "tag_id"], name: "index_post_tag_relations_on_post_image_id_and_tag_id", unique: true
+    t.index ["post_image_id"], name: "index_post_tag_relations_on_post_image_id"
+    t.index ["tag_id"], name: "index_post_tag_relations_on_tag_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -108,4 +110,6 @@ ActiveRecord::Schema.define(version: 2024_03_09_092857) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "post_tag_relations", "post_images"
+  add_foreign_key "post_tag_relations", "tags"
 end

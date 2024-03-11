@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  namespace :public do
+    get 'maps/show'
+  end
   # 会員側用
   # URL /users/sign_in...
   devise_for :users,skip: [:passwords], controllers: {
@@ -45,6 +48,7 @@ Rails.application.routes.draw do
       resource :favorite, only: [:index, :create, :destroy]
       resources :post_comments, only: [:create, :destroy]
     end
+    resource :map, only: [:show]
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
