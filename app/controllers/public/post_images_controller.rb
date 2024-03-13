@@ -20,8 +20,16 @@ class Public::PostImagesController < ApplicationController
   end
 
   def index
-      @post_images = PostImage.all
-      @user = User.all
+    respond_to do |format|
+      format.html do
+        @user = User.all
+        @post_images = PostImage.all
+      end
+      format.json do
+        @user = User.all
+        @post_images = PostImage.all
+      end
+    end
   end
 
   def show
@@ -32,10 +40,10 @@ class Public::PostImagesController < ApplicationController
   end
 
   def edit
-      @post_image = PostImage.find(params[:id]) 
+      @post_image = PostImage.find(params[:id])
       @tag_list = @post_image.tags.pluck(:name).join(',')
   end
-  
+
   def update
       @post_image = PostImage.find(params[:id])
       tag_list=params[:post_image][:name].split('、')
@@ -44,23 +52,23 @@ class Public::PostImagesController < ApplicationController
          flash[:notice] = "You have edited post successfully."
          redirect_to post_image_path(@post_image)
       else
-        flash.now[:alert] = "You have Failed to edit." 
+        flash.now[:alert] = "You have Failed to edit."
         render :edit
       end
   end
-      
+
   def destroy
       post_image = PostImage.find(params[:id])
       post_image.destroy
       redirect_to post_images_path
   end
-      
+
   def search_tag
       @tag_list = Tag.all  #検索結果画面でもタグ一覧表示
       @tag = Tag.find(params[:tag_id])  #検索されたタグを受け取る
       @post_images = @tag.post_images  #検索されたタグに紐づく投稿を表示
   end
-  
+
 
   private
   def post_image_params

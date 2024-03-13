@@ -12,7 +12,7 @@ class Public::SearchesController < ApplicationController
       @tags = Tag.search_for(@content, @method)
       @records = [ ]
       @tags.each do |tag|
-        @records.contact(tag.post_images)
+        @records.concat(tag.post_images)
       end
     end
   end

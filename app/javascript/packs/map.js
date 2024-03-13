@@ -12,32 +12,34 @@ async function initMap() {
 
   // 地図の中心と倍率は公式から変更しています。
   map = new Map(document.getElementById("map"), {
-    center: { lat: 35.681236, lng: 139.767125 }, 
+    center: { lat: 35.681236, lng: 139.767125 },
     zoom: 15,
     mapTypeControl: false
   });
-  
+
+  // マーカーの表示
   const response = await fetch("/post_images.json").then((res) => res.json()).catch(error => console.error(error))
-  if (response.ok) {
+  console.log(response.ok)
+  if (response) {
     const items = response.data.items
-    items.forEach((item) => {
-      const marker = new google.maps.Marker({
-        position: new google.maps.LatLng(item.latitude, item.longitude),
-        map,
-        title: item.address,
-      });
-      
-      const information = new google.maps.InfoWindow({
+   items.forEach((item) => {
+
+    const marker = new google.maps.Marker({
+      position: new google.maps.LatLng(item.latitude, item.longitude),
+      map,
+      title: item.address
+    });
+    // 以下、追記
+    const information = new google.maps.InfoWindow({
       content: `
         <div class="information container p-0">
           <div class="mb-3 d-flex align-items-center">
-            <img class="rounded-circle mr-2" src="${item.user.image}" width="40" height="40"><p class="lead m-0 font-weight-bold">${item.user.name}</p>
+            <img class="rounded-circle mr-2" src="${item.user.profile_image}" width="40" height="40"><p class="lead m-0 font-weight-bold">${item.user.name}</p>
           </div>
           <div class="mb-3">
-            <img class="thumbnail" src="${item.image}" loading="lazy">
+            <img class="thumbnail" src="${item.image}" loading="lazy" width="150" height="150">
           </div>
           <div>
-            <h1 class="h4 font-weight-bold">${item.address}</h1>
             <p class="text-muted">${item.address}</p>
             <p class="lead">${item.body}</p>
           </div>
@@ -52,7 +54,7 @@ async function initMap() {
       })
     })
   })
-  }
+}
 }
 
 initMap()

@@ -47,8 +47,8 @@ Rails.application.routes.draw do
       resource :favorite, only: [:index, :create, :destroy]
       resources :post_comments, only: [:create, :destroy]
     end
-    get "/search", to: "searches#search"
-    get "search_tag" => "post_images#search_tag"
+    get '/search', to: 'searches#search'
+    get 'search_tag' => 'post_images#search_tag'
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
