@@ -26,8 +26,8 @@
     <p><%= image_tag post_comment.user.get_profile_image(100, 100) %></p>
     <%= post_comment.user.name %>
     <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
-    <% if @post_comment.user == current_user %>
-      <%= link_to "削除する", post_iamge_post_comment_path(@post_comment.post_image, @post_comment), method: :delete, data: { confirm: "削除してもよろしいですか？" }  %>
+    <% if post_comment.user == current_user %>
+      <%= link_to "削除する", post_image_post_comment_path(post_comment.post_image, post_comment), method: :delete, data: { confirm: "削除してもよろしいですか？" }  %>
     <% end %>
   <% end %>
 </div>
@@ -39,14 +39,21 @@
 </div>
 
 
-<p><%= @post_image.user.name %></p>
+<p><%= link_to @post_image.user.name, user_path(@post_image.user_id) %></p>
 <p><%= @post_image.body %></p>
+<!--タグリスト-->
 <p>
   <% @post_image.tags.each do |tag| %>
-    <%= tag.name %>
+    <i class="fa-sharp fa-solid fa-tag"></i>
+    <%= link_to tag.name, search_tag_path(tag_id: tag.id) %>
   <% end %>
 </p>
 <span><i class="fa-solid fa-location-dot"></i> <%= @post_image.address %></span>
 <p><%= link_to "編集する", edit_post_image_path %></p>
 <p><%= link_to "削除する", post_image_path(@post_image), method: :delete, data: {confirm: "本当に削除しますか？"} %></p>
 
+<div class="container">
+  <div id="map"></div>
+</div>
+
+<%= javascript_pack_tag 'map', 'data-turbolinks-track': 'reload' %>

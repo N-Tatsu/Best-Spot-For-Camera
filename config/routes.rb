@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :public do
-    get 'maps/show'
-  end
   # 会員側用
   # URL /users/sign_in...
   devise_for :users,skip: [:passwords], controllers: {
@@ -10,11 +7,11 @@ Rails.application.routes.draw do
     sessions: 'public/sessions'
   }
   # 会員側用ログアウト機能
-  
+
   devise_scope :user do
     post "users/guest_sign_in", to: "public/sessions#guest_sign_in"
   end
-  
+
    # 管理者側用
   # URL /admin/sign_in ...
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
@@ -42,17 +39,16 @@ Rails.application.routes.draw do
     patch 'users/withdraw', as:'withdraw'
     resources :users, only: [:index, :show, :edit, :update] do
       member do #1つのデータに対して行う処理を定義することができる
-        # get :liked_post_images
-         # いいねした一覧 usersにネストして
-      # get :liked_posts
+        get :favorites     # いいねした一覧 usersにネストして
       end
     end
-    
+
     resources :post_images, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
       resource :favorite, only: [:index, :create, :destroy]
       resources :post_comments, only: [:create, :destroy]
     end
-    resource :map, only: [:show]
+    get "/search", to: "searches#search"
+    get "search_tag" => "post_images#search_tag"
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

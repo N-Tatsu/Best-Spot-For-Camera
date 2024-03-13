@@ -10,12 +10,20 @@
 <%= f.text_field :body %>
 <h4>Tag（「、」で区切ると複数タグを登録できます）</h4>
 <%= f.text_field :name, class: 'form-control' %>
-<%= text_field_tag :zipcode, nil, class: "form-control", placeholder: "郵便番号" %>
-<%= f.text_field :address, :zipcode, class: "form-control", placeholder: "住所" %>
+<div class="input-group mb-3 mt-4">
+      <div class="input-group-prepend">
+        <span class="input-group-text" aria-hidden="true"><i class="fa-solid fa-tenge-sign"></i></span>
+      </div>
+      <%= text_field_tag :zipcode, nil, class: "form-control", placeholder: "郵便番号" %>
+    </div>
+    <div class="input-group mb-3 mt-4">
+      <div class="input-group-prepend">
+        <span class="input-group-text" aria-hidden="true"><i class="fa-solid fa-location-dot"></i></span>
+      </div>
+      <%= f.text_field :address, class: "form-control", placeholder: "住所" %>
+    </div>
 <%= f.submit '投稿する' %>
-
-<%= javascript_pack_tag "jpostal",  'data-turbolinks-track': 'reload' %>
 
 <% end %>
 
-
+<%= javascript_pack_tag "jpostal",  'data-turbolinks-track': 'reload' %>

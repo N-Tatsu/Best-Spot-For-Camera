@@ -1,0 +1,15 @@
+<% if @model == 'user' %>
+  <h3>User search for "<%= @content %>"</h3>
+    <% @records.each do |record| %>
+      <%= image_tag record.profile_image, size: "100x100" %>
+      <%= record.name %>
+      <%= record.introduction %>
+      <%= link_to "詳細を見る", user_path(record) %>
+    <% end %>
+<% else %>
+  <h3>Tags search for "<%= @content %>"</h3>
+    <% @records.each do |record| %>
+      <%= image_tag record.image, size: "100x100" %>
+      <%= record.body %>
+    <% end %>
+<% end %>

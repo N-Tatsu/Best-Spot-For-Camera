@@ -21,20 +21,34 @@ class User < ApplicationRecord
   # SecureRandom.urlsafe_base64は、ランダムな文字列を生成するRubyのメソッドの一種
   GUEST_USER_EMAIL = "guest@example.com"
 
+  #ゲストログイン用のゲストログイン用のメールアドレス・パスワード・ユーザー名を設定
     def self.guest
       find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
-        user.password = SecureRandom.urlsafe_base64
+        user.password = SecureRandom.urlsafe_base64  #パスワードはランダムで発行
         user.name = "guestuser"
       end
     end
 
-    #初期画像
+    #初期プロフィール画像
     def get_profile_image(width, height)
       unless profile_image.attached?
         file_path = Rails.root.join('app/assets/images/no_profile_image.jpg')
         self.profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
       end
       profile_image.variant(resize_to_limit: [width, height]).processed
+    end
+
+    # "user"を選択した時の検索の流れ
+    def self.search_for(content, method)
+      if method == 'perfect'
+        User.where(name: content)
+      elsif method == 'forward'
+        User.where('name LIKE ?', content + '%')
+      elsif method == 'backward'
+        User.where('name LIKE ?', '%' + content)
+      else
+        User.where('name LIKE ?', '%' + content + '%')
+      end
     end
 end
 

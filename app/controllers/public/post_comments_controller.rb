@@ -10,7 +10,6 @@ class Public::PostCommentsController < ApplicationController
 
   def destroy
     PostComment.find(params[:id]).destroy
-    redirect_to 
     redirect_to request.referer
   end
 

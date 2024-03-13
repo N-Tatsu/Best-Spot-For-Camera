@@ -1,0 +1,39 @@
+<h1><%= @user.name %>さんがいいねした投稿</h1>
+<table class="table">
+    <tbody>
+       <% @favorites_post_images.each do |post_image| %>
+       <tr>
+         <td>
+            <%= link_to  post_image_path(post_image) do %>
+              <%= image_tag post_image.image, size: "100x100" %>
+            <% end %>
+         </td>
+         <td>
+             <%= link_to post_image.user.name, user_path(@user) %>
+         </td>
+         <td>
+             <%= post_image.body %>
+         </td>
+         <td>
+             <% post_image.tags.each do |tag| %>
+                 <%= tag.name %>
+             <% end %>
+         </td>
+         <td>
+             <% if post_image.favorited_by?(current_user) %>
+                  <%= link_to post_image_favorite_path(post_image), method: :delete do %>
+                     ♥<%= post_image.favorites.count %> いいね
+                  <% end %>
+             <% else %>
+                   <%= link_to post_image_favorite_path(post_image), method: :post do %>
+                      ♡<%= post_image.favorites.count %> いいね
+                   <% end %>
+             <% end %>
+         </td>
+      </tr>
+      <% end %>
+   </tbody>
+</table>
+
+
+

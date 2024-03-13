@@ -28,9 +28,12 @@
      <% end %>
   </p>
   <p><%= post_image.body %></p>
+  <!--タグリスト-->
   <p>
     <% post_image.tags.each do |tag| %>
-      <%= tag.name %>
+    <i class="fa-sharp fa-solid fa-tag"></i>
+      <%= link_to tag.name, search_tag_path(tag_id: tag.id) %>
+      <%= "(#{tag.post_images.count})" %>
     <% end %>
   </p>
   <span><i class="fa-solid fa-location-dot"></i> <%= post_image.address %></span>

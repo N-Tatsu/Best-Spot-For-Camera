@@ -30,6 +30,12 @@ class Public::UsersController < ApplicationController
   def withdraw
   end
   
+  def favorites
+    @user = User.find(params[:id])
+    favorites = Favorite.where(user_id: @user.id).pluck(:post_image_id)  #favoritesに@userがいいねしたpost_image一覧が取得される
+    @favorites_post_images = PostImage.find(favorites)
+    # @post_image = PostImage.find(params[:id])
+  end
   
   private
   

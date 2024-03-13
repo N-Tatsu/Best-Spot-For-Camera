@@ -49,11 +49,17 @@ class Public::PostImagesController < ApplicationController
       end
   end
       
-      def destroy
-          post_image = PostImage.find(params[:id])
-          post_image.destroy
-          redirect_to post_images_path
-      end
+  def destroy
+      post_image = PostImage.find(params[:id])
+      post_image.destroy
+      redirect_to post_images_path
+  end
+      
+  def search_tag
+      @tag_list = Tag.all  #検索結果画面でもタグ一覧表示
+      @tag = Tag.find(params[:tag_id])  #検索されたタグを受け取る
+      @post_images = @tag.post_images  #検索されたタグに紐づく投稿を表示
+  end
   
 
   private

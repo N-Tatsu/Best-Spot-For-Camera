@@ -1,7 +1,9 @@
 class PostImage < ApplicationRecord
     #バリデーション
     validates :address, presence: true
+    #addressカラムの内容を緯度・経度に変換することを指定
     geocoded_by :address
+    #バリデーションの実行後に変換処理を実行して、latitudeカラム・longitudeカラムに緯度・経度の値が入力される
     after_validation :geocode
     
     #関連付け
@@ -41,10 +43,14 @@ class PostImage < ApplicationRecord
         end
 
     end
-
-    # 引数の"user_id"が既にテーブル内で重複していないかチェック
-    # "scope"で"user_id"と"post_image_id"のペアが保存されているか判定
-    #validates :user_id, uniqueness: {scope: :post_image_id}
-
     
+     def liked_post_iamges(user, page, per_page) # 1. モデル内での操作を開始
+        includes(:post_images_favorites) # 2. post_favorites テーブルを結合
+         .where(favorites: { user_id: user.id }) # 3. ユーザーがいいねしたレコードを絞り込み
+         .order(created_at: :desc) # 4. 投稿を作成日時の降順でソート
+         .page(page) # 5. ページネーションのため、指定ページに表示するデータを選択
+         .per(per_page) # 6. ページごとのデータ数を指定
+     end
+    
+   
 end

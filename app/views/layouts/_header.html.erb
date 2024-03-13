@@ -20,6 +20,9 @@
     <li>
         ログアウト
     </li>
+    <div>
+        <%= render "layouts/search_form" %>
+    </div>
 <% elsif user_signed_in? %>
     <li>
         <%= link_to "投稿する", new_post_image_path %>
@@ -36,6 +39,9 @@
     <li>
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
     </li>
+    <div>
+        <%= render "layouts/search_form" %>
+    </div>
 <% else %>
     <li>
         <%= link_to "新規登録", new_user_registration_path %>
@@ -46,4 +52,7 @@
     <li>
         <%= link_to "ゲストログイン(閲覧用)", users_guest_sign_in_path, method: :post %>
     </li>
+    <div>
+        <%= render "layouts/search_form" %>
+    </div>
 <% end %>
