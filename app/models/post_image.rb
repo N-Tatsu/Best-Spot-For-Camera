@@ -5,7 +5,7 @@ class PostImage < ApplicationRecord
     geocoded_by :address
     #バリデーションの実行後に変換処理を実行して、latitudeカラム・longitudeカラムに緯度・経度の値が入力される
     after_validation :geocode
-    
+
     #関連付け
     has_one_attached :image
     belongs_to :user
@@ -14,8 +14,8 @@ class PostImage < ApplicationRecord
     has_many :post_tag_relations, dependent: :destroy
     # 中間テーブル"post_tag_relations"を通してアソシエーション
     has_many :tags, through: :post_tag_relations
-    
-   
+
+
 
     # 引数で渡された”user_id”がFavoriteテーブルに存在するかどうか調べる
     def favorited_by?(user)
@@ -43,7 +43,7 @@ class PostImage < ApplicationRecord
         end
 
     end
-    
+
      def liked_post_iamges(user, page, per_page) # 1. モデル内での操作を開始
         includes(:post_images_favorites) # 2. post_favorites テーブルを結合
          .where(favorites: { user_id: user.id }) # 3. ユーザーがいいねしたレコードを絞り込み
@@ -51,6 +51,13 @@ class PostImage < ApplicationRecord
          .page(page) # 5. ページネーションのため、指定ページに表示するデータを選択
          .per(per_page) # 6. ページごとのデータ数を指定
      end
-    
-   
+
+    def get_image(width, height)
+      unless image.attached?
+        file_path = Rails.root.join('app/assets/images/no_profile_image.jpg')
+        self.image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+      end
+      image.variant(resize_to_limit: [width, height]).processed
+    end
+
 end

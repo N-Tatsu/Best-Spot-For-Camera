@@ -60,4 +60,4 @@ gem 'devise'
 gem 'kaminari','~> 1.2.1'  #ページネーション
 
 gem 'dotenv-rails'  #環境変数を管理する機能
-gem 'geocoder'  #位置情報を扱うための機能
+gem "geocoder"  #位置情報を扱うための機能

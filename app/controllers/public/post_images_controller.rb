@@ -9,6 +9,11 @@ class Public::PostImagesController < ApplicationController
       @post_image.user_id = current_user.id
       # 受け取った値を,で区切って配列にする
       tag_list = params[:post_image][:name].split('、')
+      result = Geocoder.search(params[:post_image][:address]).first
+      if result.present?
+          @post_image.latitude = result.latitude
+          @post_image.longitude = result.longitude
+      end
       if @post_image.save!
           @post_image.save_tags(tag_list)
           flash[:notice] = "You have created post successfully."
