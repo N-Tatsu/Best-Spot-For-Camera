@@ -35,8 +35,8 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     get 'homes/about', as:'about'
-    get 'users/unsubscribe', as:'unsubscribe'
-    patch 'users/withdraw', as:'withdraw'
+    get 'users/unsubscribe', as: 'user_unsubscribe'
+    patch 'users/withdraw', as: 'withdraw_user'
     resources :users, only: [:index, :show, :edit, :update] do
       member do #1つのデータに対して行う処理を定義することができる
         get :favorites     # いいねした一覧 usersにネストして

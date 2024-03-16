@@ -17,6 +17,7 @@ class Public::UsersController < ApplicationController
   end
 
   def update
+    @customer = current_customer
     if @user.update(user_params)
        redirect_to user_path(@user), notice: "You have updated user successfully."
     else
@@ -25,9 +26,14 @@ class Public::UsersController < ApplicationController
   end
 
   def unsubscribe
+    @user = User.find_by(name: params[:email])
   end
 
   def withdraw
+    @user = User.find(current_user.id)
+    @user.update(is_deleted: false)
+    reset_session
+    redirect_to root_path
   end
   
   def favorites
@@ -43,6 +49,7 @@ class Public::UsersController < ApplicationController
     params.require(:user).permit(:name, :introduction, :profile_image)
   end
   
+  #現在ログインしているユーザーが編集しようとしているユーザーと同じかどうかを確認する
   def ensure_correct_user
     @user = User.find(params[:id])
     unless @user == current_user
