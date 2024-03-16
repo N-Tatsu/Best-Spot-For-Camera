@@ -28,6 +28,10 @@ class User < ApplicationRecord
         user.name = "guestuser"
       end
     end
+    
+    def guest_user?
+      email == GUEST_USER_EMAIL
+    end
 
     #初期プロフィール画像
     def get_profile_image(width, height)
