@@ -48,7 +48,7 @@
     <%= link_to tag.name, search_tag_path(tag_id: tag.id) %>
   <% end %>
 </p>
-<span><i class="fa-solid fa-location-dot"></i> <%= @post_image.address %></span>
+<span><i class="fa-solid fa-location-dot"></i><%= @post_image.address %></span>
 <p><%= link_to "編集する", edit_post_image_path %></p>
 <p><%= link_to "削除する", post_image_path(@post_image), method: :delete, data: {confirm: "本当に削除しますか？"} %></p>
 
