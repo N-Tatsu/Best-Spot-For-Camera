@@ -26,9 +26,8 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'homes#top'
     resources :users, only: [:index, :show, :edit, :update]
-    resources :post_images, only: [:show] do
-      resources :reviews, only: [:index, :destroy]
-    end
+    resources :post_images, only: [:show]
+    resources :reviews, only: [:index, :destroy]
     resources :tags, only: [:index, :destroy]
   end
 

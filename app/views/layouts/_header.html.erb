@@ -15,19 +15,29 @@
                 <ul class="navbar-nav ml-auto">
                     <% if admin_signed_in? %>
                         <li class="nav-item">
-                            Pictures
+                            <%= link_to admin_root_path, class: "btn btn-light mx-3" do %>
+                              <i class="fa-solid fa-film"></i>投稿管理
+                            <% end %>
                         </li>
                         <li class="nav-item">
-                            Users
+                            <%= link_to  admin_users_path, class: "btn btn-light mx-3" do %>
+                               <i class="fa-solid fa-users"></i>ユーザー管理
+                            <% end %>
                         </li>
                         <li class="nav-item dropdown">
-                            Reviews
+                            <%= link_to admin_reviews_path, class: "btn btn-light mx-3" do %>
+                              <i class="fa-solid fa-comment"></i>コメント管理
+                            <% end %>
                         </li>
                         <li class="nav-item dropdown">
-                            Tags
+                            <%= link_to admin_tags_path, class: "btn btn-light mx-3" do %>
+                              <i class="fa-solid fa-tags"></i>タグ管理
+                            <% end %>
                         </li>
                         <li class="nav-item dropdown">
-                            ログアウト
+                            <%= link_to destroy_admin_session_path, method: :delete, class: "btn btn-light mx-3" do %>
+                              <i class="fa-solid fa-right-from-bracket"></i>ログアウト
+                            <% end %>
                         </li>
                     <% elsif user_signed_in? %>
                         <li class="nav-item dropdown">
