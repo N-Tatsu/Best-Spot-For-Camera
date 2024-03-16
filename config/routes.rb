@@ -35,7 +35,6 @@ Rails.application.routes.draw do
   # （scope module）は「Controller#Action」のみカスタマイズしたい場合に使用
   scope module: :public do
     root to: 'homes#top'
-    get 'homes/about', as:'about'
     get 'users/unsubscribe', as: 'user_unsubscribe'
     patch 'users/withdraw', as: 'withdraw_user'
     resources :users, only: [:index, :show, :edit, :update] do
@@ -45,7 +44,7 @@ Rails.application.routes.draw do
     end
 
     resources :post_images, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
-      resource :favorite, only: [:index, :create, :destroy]
+      resource :favorite, only: [:create, :destroy]
       resources :post_comments, only: [:create, :destroy]
     end
     get '/search', to: 'searches#search'
