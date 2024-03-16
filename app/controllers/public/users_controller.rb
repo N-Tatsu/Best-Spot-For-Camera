@@ -17,9 +17,9 @@ class Public::UsersController < ApplicationController
   end
 
   def update
-    @customer = current_customer
+    @user = current_user
     if @user.update(user_params)
-       redirect_to user_path(@user), notice: "You have updated user successfully."
+       redirect_to user_path(@user), notice: "プロフィールを変更しました"
     else
       render "edit"
     end
@@ -35,20 +35,20 @@ class Public::UsersController < ApplicationController
     reset_session
     redirect_to root_path
   end
-  
+
   def favorites
     @user = User.find(params[:id])
     favorites = Favorite.where(user_id: @user.id).pluck(:post_image_id)  #favoritesに@userがいいねしたpost_image一覧が取得される
     @favorites_post_images = PostImage.find(favorites)
     # @post_image = PostImage.find(params[:id])
   end
-  
+
   private
-  
+
   def user_params
     params.require(:user).permit(:name, :introduction, :profile_image)
   end
-  
+
   #現在ログインしているユーザーが編集しようとしているユーザーと同じかどうかを確認する
   def ensure_correct_user
     @user = User.find(params[:id])

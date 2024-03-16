@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   }
   # 会員側用ログアウト機能
 
+  #ゲストログインのコントローラへ繋ぐルーティング
   devise_scope :user do
     post "users/guest_sign_in", to: "public/sessions#guest_sign_in"
   end

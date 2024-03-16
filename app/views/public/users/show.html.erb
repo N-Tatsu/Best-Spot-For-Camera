@@ -1,3 +1,6 @@
+<% flash.each do |message_type, message| %>
+  <div class="flash-message" <%= message_type %>><%= message %></div>
+<% end %>
 <h1><%= @user.name %>さんのページ</h1>
 <p><%= image_tag @user.get_profile_image(100,100) %></p>
 <p><%= @user.name%></p>
