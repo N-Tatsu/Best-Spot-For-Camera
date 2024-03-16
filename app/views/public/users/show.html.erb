@@ -19,6 +19,7 @@
   <%= link_to post_image_path(post_image.id) do %>
       <%= image_tag post_image.image, size: "200x200" %>
   <% end %>
-  <%= post_image.body %>
-  <p>いいね×<%=post_image.favorites.count %></p>
+  <p><%= post_image.body %></p>
+  <p>いいね×<%= post_image.favorites.count %></p>
+  <p>コメント数×<%= post_image.post_comments.count %></p>
 <% end %>

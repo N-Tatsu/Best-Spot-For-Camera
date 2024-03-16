@@ -18,3 +18,9 @@
   <% end %>
 </p>
 <p><i class="fa-solid fa-location-dot"></i><%= @post_image.address %></p>
+
+<div class="container">
+  <div id="map"></div>
+</div>
+
+<%= javascript_pack_tag 'map', 'data-turbolinks-track': 'reload' %>

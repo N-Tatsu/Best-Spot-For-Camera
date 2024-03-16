@@ -1,2 +1,18 @@
-<h1>Admin::Users#show</h1>
-<p>Find me in app/views/admin/users/show.html.erb</p>
+<h1><%= @user.name %>さんのページ</h1>
+<p><%= image_tag @user.get_profile_image(100,100) %></p>
+<p><%= @user.name %></p>
+<p><%= @user.introduction %></p>
+<p><%= link_to edit_admin_user_path(@user),class: "btn btn-outline-secondary btn-block edit_user_#{@user.id}" do %>
+    <i class="fa-solid fa-user-gear"></i>
+  <% end %>
+</p>
+
+<h2><%= @user.name%>さんの投稿履歴</h2>
+<% @post_images. each do |post_image| %>
+  <%= link_to admin_post_image_path(post_image.id) do %>
+    <%= image_tag post_image.get_image(200,200) %>
+  <% end %>
+  <%= post_image.body %>
+  <p>いいね×<%= post_image.favorites.count %></p>
+  <p>コメント数×<%= post_image.post_comments.count %></p>
+<% end %>
