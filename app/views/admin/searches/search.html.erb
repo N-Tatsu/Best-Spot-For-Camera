@@ -1,0 +1,20 @@
+<% if @model == 'user' %>
+  <h3>User search for "<%= @content %>"</h3>
+    <% @records.each do |record| %>
+      <%= image_tag record.profile_image, size: "100x100" %>
+      <%= record.name %>
+      <%= record.introduction %>
+      <%= link_to "詳細を見る", user_path(record) %>
+    <% end %>
+<% else %>
+  <h3>Tags search for "<%= @content %>"</h3>
+    <% @records.each do |record| %>
+    <%= link_to post_image_path(record.id) do %>
+      <%= image_tag record.image, size: "100x100" %>
+    <% end %>
+      <%= record.body %>
+      いいね×<%= record.favorites.count %>
+      コメント×<%= record.post_comments.count %>
+      <%= link_to record.user.name, user_path(record.user.id) %>
+    <% end %>
+<% end %>

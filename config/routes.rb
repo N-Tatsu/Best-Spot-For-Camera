@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     resources :post_images, only: [:show]
     resources :reviews, only: [:index, :destroy]
     resources :tags, only: [:index, :destroy]
+    get '/search', to: 'searches#search'
   end
 
   # （scope module）は「Controller#Action」のみカスタマイズしたい場合に使用
