@@ -1,2 +1,7 @@
-<h1>Admin::Tags#index</h1>
-<p>Find me in app/views/admin/tags/index.html.erb</p>
+<h1>投稿タグ管理</h1>
+
+<% @tags.each do |tag| %>
+  <i class="fa-sharp fa-solid fa-tag"></i>
+  <%= tag.name %>
+  <%= link_to "削除する", admin_tag_path(tag), method: :delete, data: { confirm: '本当に削除しますか?' }, class: "btn btn-sm btn-danger" %>
+<% end %>
