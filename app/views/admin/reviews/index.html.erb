@@ -1,2 +1,8 @@
-<h1>Admin::Reviews#index</h1>
+<h1>ユーザーコメント管理</h1>
 <p>Find me in app/views/admin/reviews/index.html.erb</p>
+<% @post_comments.each do |post_comment| %>
+  <%= link_to @users.find(post_comment.user_id).name, admin_user_path(post_comment.user_id) %>
+  <%= post_comment.comment %>
+  <%= post_comment.created_at.strftime('%Y%m%d') %>
+  <%= link_to "コメントを削除", admin_review_path(post_comment), method: :delete , data: { confirm: '本当に削除しますか?' }, class: "btn btn-sm btn-danger" %>
+<% end %>
