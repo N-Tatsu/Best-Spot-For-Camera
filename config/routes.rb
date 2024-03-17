@@ -19,9 +19,6 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
-  # 管理者側用ログアウト機能
-
-
   # namespace 「URI Pattern」と「Controller#Action」の2つを同時にカスタマイズしたい場合に使用
   namespace :admin do
     root to: 'homes#top'

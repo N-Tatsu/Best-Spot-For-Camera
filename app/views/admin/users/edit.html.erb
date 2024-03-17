@@ -1,2 +1,17 @@
 <h1><%= @user.name %>さんのアカウント管理</h1>
-<p>Find me in app/views/admin/users/edit.html.erb</p>
+
+<%= form_with model: @user, url: admin_user_path(@user.id), method: :patch, local: true do |f| %>
+  <%= f.label :image %>
+  <%= f.file_field :image, accept: 'image/*' %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label :introduction %>
+  <%= f.text_field :introduction %>
+  <%= f.label :email %>
+  <%= @user.email %>
+  <!--ステータス -->
+  <%= f.label :user_status %>
+  <%= f.select :is_deleted, [['有効', true], ['退会済み', false]], {}, { class: 'form-control' } %>
+  <%#= f.select :is_deleted, [['有効', false], ['退会済み', true]], {}, { class: 'form-control' } %>
+  <%= f.submit "変更内容を保存" %>
+<% end %>

@@ -1,8 +1,7 @@
 <h1>ユーザー管理一覧</h1>
 
 <% @users.each do |user| %>
-  <p><%= link_to user.name, admin_user_path(user.id) %></p>
-  <p><%= user.introduction %></p>
+  <p><%= user.name %></p>
   <p><%= user.introduction %></p>
   <p><%= link_to "詳細を見る", admin_user_path(user.id) %></p>
 <% end %>
