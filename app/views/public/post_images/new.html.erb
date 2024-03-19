@@ -1,29 +1,56 @@
-<h1><i class="fa-regular fa-image"></i>Post</h1>
-<div>
-  <%= flash.now[:alert] %>
+<div class="container-fluid">
+    <h1 class="text-center p-5"><i class="fa-regular fa-image"></i>新規投稿</h1>
+    <%= flash.now[:alert] %>
+
+
+    <%= form_with model: @post_image, url: post_images_path, method: :post do |f| %>
+    <table class="table">
+        <tbody>
+            <tr>
+                <td>投稿写真*</td>
+                <td><%= f.file_field :image,accept: "image/*" %></td>
+            </tr>
+            <tr>
+                <td>タイトルまたは投稿本文*</td>
+                <td><%= f.text_field :body, class: "form-control", placeholder: "タイトルまたは投稿本文" %></td>
+            </tr>
+            <tr>
+                <td>タグ(「、」で区切るとタグを複数登録)*</td>
+                <td><%= f.text_field :name, class: 'form-control', placeholder: "タグ欄" %></td>
+            </tr>
+            <tr>
+                <td>郵便番号</td>
+                <td>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" aria-hidden="true"><i class="fa-solid fa-tenge-sign"></i></span>
+                        </div>
+                        <%= text_field_tag :zipcode, nil, class: "form-control", placeholder: "郵便番号" %>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>住所</td>
+                <td>
+                    <div class="input-group mb-3 mt-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" aria-hidden="true"><i class="fa-solid fa-location-dot"></i></span>
+                        </div>
+                        <%= f.text_field :address, class: "form-control", placeholder: "住所" %>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <div class="d-flex">
+                        <%= f.submit '投稿する' %>
+                        <p class="text-danger">「*」は必須</p>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <% end %>
 </div>
-
-<%= form_with model: @post_image, url: post_images_path, method: :post do |f| %>
-<h4>Picture</h4>
-<%= f.file_field :image,accept: "image/*" %>
-<h4>Caption</h4>
-<%= f.text_field :body %>
-<h4>Tag（「、」で区切ると複数タグを登録できます）</h4>
-<%= f.text_field :name, class: 'form-control' %>
-<div class="input-group mb-3 mt-4">
-      <div class="input-group-prepend">
-        <span class="input-group-text" aria-hidden="true"><i class="fa-solid fa-tenge-sign"></i></span>
-      </div>
-      <%= text_field_tag :zipcode, nil, class: "form-control", placeholder: "郵便番号" %>
-    </div>
-    <div class="input-group mb-3 mt-4">
-      <div class="input-group-prepend">
-        <span class="input-group-text" aria-hidden="true"><i class="fa-solid fa-location-dot"></i></span>
-      </div>
-      <%= f.text_field :address, class: "form-control", placeholder: "住所" %>
-    </div>
-<%= f.submit '投稿する' %>
-
-<% end %>
-
 <%= javascript_pack_tag "jpostal",  'data-turbolinks-track': 'reload' %>

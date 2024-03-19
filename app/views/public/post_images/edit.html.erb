@@ -1,4 +1,6 @@
-<h1>Eding Picture</h1>
+<div class="container">
+
+<h2 class="text-center p-5">Eding Picture</h2>
 <% flash.each do |message_type, message| %>
   <div class="flash-message" <%= message_type %>><%= message %></div>
 <% end %>
@@ -12,7 +14,9 @@
   <%= text_field_tag :zipcode, nil, class: "form-control", placeholder: "郵便番号" %>
   <%= f.text_field :address, class: "form-control", placeholder: "住所" %>
   <%= f.submit '編集を保存する' %>
-  
+
 
 <%= javascript_pack_tag "jpostal",  'data-turbolinks-track': 'reload' %>
 <% end %>
+
+</div>
