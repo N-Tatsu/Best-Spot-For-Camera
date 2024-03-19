@@ -31,11 +31,11 @@ class Public::PostImagesController < ApplicationController
     respond_to do |format|
       format.html do
         @user = User.all
-        @post_images = PostImage.all
+        @post_images = PostImage.page(params[:page])
       end
       format.json do
         @user = User.all
-        @post_images = PostImage.all
+        @post_images = PostImage.page(params[:page])
       end
     end
   end
