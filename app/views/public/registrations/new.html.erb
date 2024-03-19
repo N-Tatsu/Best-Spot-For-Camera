@@ -2,10 +2,10 @@
     <div class="mx-auto p-3" style="width: 500px;">
         <h1>新規ユーザー登録</h1>
 
-
+        <div class="mt-4">
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
             <%= render "public/shared/error_messages", resource: resource %>
-            <table>
+            <table class="table">
                 <tbody>
                     <tr>
                         <td><%= f.label :ユーザー名 %></td>
@@ -29,15 +29,12 @@
                         <td><%= f.password_field :password_confirmation, autocomplete: "new-password" %></td>
                     </tr>
                     <tr>
-                      <td></td>
-                      <td><%= f.submit "登録する", class:"btn btn-success" %></td>
-                    </tr>
-                    <tr>
-                      <td></td>
                       <td><%= render "public/shared/links" %></td>
+                      <td><%= f.submit "登録する", class:"btn btn-success" %></td>
                     </tr>
                 </tbody>
             </table>
         <% end %>
+        </div>
     </div>
 </div>

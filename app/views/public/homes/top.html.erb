@@ -1,11 +1,15 @@
 <div class="w-100 d-flex justify-content-center align-items-center vh-100">
     <div class="text-center">
-<h1>Best Spot For Camera</h1>
-<p class="h2">WHERE IS BESTSHOT?</p>
-<p>あなたが撮った最高の一枚を投稿するサイトです。</p>
-<p>位置情報を一緒に載せて最高の一枚を全世界に発信しよう！</p>
-<p>会員登録がお済みでない方は<%= link_to "こちらから", new_user_registration_path %><p>
-<p>登録済みの方は<%= link_to "こちらから", new_user_session_path %><p>
-<p>お試し利用は<%= link_to "こちらから(閲覧用)", users_guest_sign_in_path, method: :post %><p>
-</div>
+        <h1>Best Spot For Camera</h1>
+        <div>
+            <p class="h2">WHERE IS BESTSHOT?</p>
+            <p class="h2">あなたが撮った最高の一枚を投稿するサイトです。</p>
+            <p class="h2">位置情報を一緒に載せて最高の一枚を全世界に発信しよう！</p>
+        </div>
+        <div class="pt-5">
+            <p class="h4">会員登録がお済みでない方は<%= link_to "こちらから", new_user_registration_path, class:"btn btn-primary btn-sm" %><p>
+            <p class="h4">登録済みの方は<%= link_to "こちらから", new_user_session_path, class:"btn btn-primary btn-sm" %><p>
+            </div>
+        <p class="h4">お試し利用は<%= link_to "こちらから(閲覧用)", users_guest_sign_in_path, method: :post, class:"btn btn-primary btn-sm" %><p>
+    </div>
 </div>
