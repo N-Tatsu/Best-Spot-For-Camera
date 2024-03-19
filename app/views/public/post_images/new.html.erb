@@ -1,22 +1,39 @@
 <div class="container-fluid">
     <h1 class="text-center p-5"><i class="fa-regular fa-image"></i>新規投稿</h1>
     <%= flash.now[:alert] %>
+    <% if @post_image.errors.any? %>
+        <%= @post_image.errors.count %>件のエラーが発生しました %>
+        <ul>
+            <% @post_image.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+        </ul>
+    <% end %>
 
 
     <%= form_with model: @post_image, url: post_images_path, method: :post do |f| %>
     <table class="table">
         <tbody>
             <tr>
-                <td>投稿写真*</td>
-                <td><%= f.file_field :image,accept: "image/*" %></td>
+                <td>
+                    投稿写真
+                　　<span class="text-danger">*</span>
+                </td>
+                <td><%= f.file_field :image,accept: "image/*", required: true %></td>
             </tr>
             <tr>
-                <td>タイトルまたは投稿本文*</td>
-                <td><%= f.text_field :body, class: "form-control", placeholder: "タイトルまたは投稿本文" %></td>
+                <td>
+                    タイトルまたは投稿本文
+                    <span class="text-danger">*</span>
+                </td>
+                <td><%= f.text_field :body, class: "form-control", placeholder: "タイトルまたは投稿本文", required: true %></td>
             </tr>
             <tr>
-                <td>タグ(「、」で区切るとタグを複数登録)*</td>
-                <td><%= f.text_field :name, class: 'form-control', placeholder: "タグ欄" %></td>
+                <td>
+                    タグ(「、」で区切るとタグを複数登録)
+                <span class="text-danger">*</span>
+                </td>
+                <td><%= f.text_field :name, class: 'form-control', placeholder: "タグ欄", required: true %></td>
             </tr>
             <tr>
                 <td>郵便番号</td>

@@ -1,10 +1,14 @@
 class PostImage < ApplicationRecord
     #バリデーション
-    validates :address, presence: true
+    # validates :address, presence: true
     #addressカラムの内容を緯度・経度に変換することを指定
     geocoded_by :address
     #バリデーションの実行後に変換処理を実行して、latitudeカラム・longitudeカラムに緯度・経度の値が入力される
     after_validation :geocode
+
+    validates :body, length: { maximum: 25 }, presence: true
+    # validates :image, presence: true
+
 
     #関連付け
     has_one_attached :image
