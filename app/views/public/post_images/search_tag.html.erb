@@ -1,22 +1,48 @@
-<div>
-<h1>タグが"<%= @tag.name %>"の投稿一覧</h1>
-<!--タグリスト(これまでのタグ数とそのタグにつけられた投稿の総数を表示-->
-<% @tag_list.each do |list| %>
-  <i class="fa-sharp fa-solid fa-tag"></i>
-  <%= link_to list.name, search_tag_path(tag_id: list.id) %>
-  <%= "(#{list.post_images.count})" %>
-<% end %>
-</div>
+<div class="container">
+    <h2 class="text-center p-5"><i class="fa-sharp fa-solid fa-tag"></i>タグが"<%= @tag.name %>"の投稿一覧</h1>
 
-<div>
-<!--タグに紐づけられた投稿を表示-->
-<% @post_images.each do |post_image| %>
-  <%= link_to post_image_path(post_image.id) do %>
-    <%= image_tag post_image.get_image(300, 300) %>
-  <% end %>
-  <%= link_to post_image.user.name, user_path(post_image.user.id) %>
-  <%= post_image.body %>
-  いいね×<%=post_image.favorites.count %>
-  コメント×<%=post_image.post_comments.count %>
-<% end %>
+    <!--タグリスト(これまでのタグ数とそのタグにつけられた投稿の総数を表示-->
+    <div class="row mb-5">
+        <% @tag_list.each do |list| %>
+        <div class="mx-2">
+            <i class="fa-sharp fa-solid fa-tag"></i>
+            <%= link_to list.name, search_tag_path(tag_id: list.id) %>
+            <%= "(#{list.post_images.count})" %>
+        </div>
+        <% end %>
+    </div>
+
+    <!--タグに紐づけられた投稿を表示-->
+    <% @post_images.each do |post_image| %>
+        <div class="row d-flex flex-wrap mb-5">
+            <div class="col-4">
+                <div>
+                    <%= link_to post_image_path(post_image.id) do %>
+                        <%= image_tag post_image.get_image(300, 300), class:"img-rounded img-responsive" %>
+                    <% end %>
+                </div>
+            </div>
+
+            <div class="col-8">
+                <div>
+                    <%= image_tag post_image.user.get_profile_image(100,70) %>
+                </div>
+                <div class="mb-4">
+                    <%= link_to post_image.user.name, user_path(post_image.user.id) %>
+                </div>
+                <div class="mb-2">
+                    <%= post_image.body %>
+                </div>
+                <div class="mb-2">
+                    <i class="fa-solid fa-location-dot"></i><%= post_image.address %>
+                </div>
+                <div class="mb-2">
+                    <i class="fa-solid fa-heart-circle-plus"></i>いいね×<%=post_image.favorites.count %>件
+                </div>
+                <div>
+                    <i class="fa-solid fa-comment"></i>コメント×<%=post_image.post_comments.count %>件
+                </div>
+            </div>
+        </div>
+    <% end %>
 </div>
