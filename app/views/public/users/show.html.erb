@@ -1,25 +1,60 @@
-<% flash.each do |message_type, message| %>
-  <div class="flash-message" <%= message_type %>><%= message %></div>
-<% end %>
-<h1><%= @user.name %>さんのページ</h1>
-<p><%= image_tag @user.get_profile_image(100,100) %></p>
-<p><%= @user.name%></p>
-<p><%= @user.introduction%></p>
-<p><%= link_to "いいね一覧", favorites_user_path(@user) %></p>
-<!--ゲストログインユーザーの場合、編集ボタンは表示されない-->
-<% unless @user.guest_user? %>
-<div class="row">
-  <%= link_to edit_user_path(@user),class: "btn btn-outline-secondary btn-block edit_user_#{@user.id}" do %>
-    <i class="fa-solid fa-user-gear"></i>
-  <% end %>
+<div class="container">
+    <h2 class="text-center p-5"><i class="fa-solid fa-user"></i><%= @user.name %>さんの詳細情報</h2>
+    <% flash.each do |message_type, message| %>
+        <div class="flash-message" <%= message_type %>><%= message %></div>
+    <% end %>
+
+    <div class="row">
+        <div class="col-4">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td><%= image_tag @user.get_profile_image(70,70) %></td>
+                    </tr>
+                    <tr>
+                        <td>ユーザー名</td>
+                        <td><%= @user.name%></td>
+                    </tr>
+                    <tr>
+                        <td>ひと言</td>
+                        <td><%= @user.introduction%></td>
+                    </tr>
+                    <!--マイページのみいいね一覧のリンクが出る-->
+                    <% if @user.id == current_user.id %>
+                    <tr>
+                        <td></td>
+                        <td><%= link_to "いいね一覧", favorites_user_path(@user) %></td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+            <!--ゲストログインユーザーの場合、編集ボタンは表示されない-->
+            <% unless @user.guest_user? %>
+            <div class="row">
+                <%= link_to edit_user_path(@user),class: "btn btn-outline-secondary btn-block edit_user_#{@user.id}" do %>
+                    <i class="fa-solid fa-user-gear"></i>
+                <% end %>
+            </div>
+            <% end %>
+        </div>
+
+        <div class="col-7 offset-1">
+            <h4 class="text-center"><i class="fa-regular fa-image"></i>投稿履歴</h4>
+            <% @post_images.each do |post_image| %>
+                <div class="d-flex mt-5">
+                    <div>
+                       <%= link_to post_image_path(post_image.id) do %>
+                          <%= image_tag post_image.image, size: "300x180" %>
+                       <% end %>
+                    </div>
+                    <div class="mx-5 my-5">
+                        <p><%= post_image.body %></p>
+                        <p>いいね×<%= post_image.favorites.count %></p>
+                        <p>コメント数×<%= post_image.post_comments.count %></p>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
 </div>
-<% end %>
-<h2>投稿履歴</h2>
-<% @post_images.each do |post_image| %>
-  <%= link_to post_image_path(post_image.id) do %>
-      <%= image_tag post_image.image, size: "200x200" %>
-  <% end %>
-  <p><%= post_image.body %></p>
-  <p>いいね×<%= post_image.favorites.count %></p>
-  <p>コメント数×<%= post_image.post_comments.count %></p>
-<% end %>
