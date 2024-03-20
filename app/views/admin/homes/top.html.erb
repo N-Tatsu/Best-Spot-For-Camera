@@ -1,27 +1,47 @@
-<h1>ユーザー投稿管理一覧</h1>
+<div class="container">
+    <h2 class="text-center p-5"><i class="fa-solid fa-camera"></i>ユーザー投稿管理一覧</h2>
 
-<% @post_images.each do |post_image| %>
-  <p>
-    <%= link_to admin_post_image_path(post_image.id) do %>
-      <%= image_tag post_image.get_image(300,300) %>
+    <% @post_images.each do |post_image| %>
+        <div class="row d-flex flex-wrap mb-5">
+            <div class="col-4">
+                <div>
+                    <%= link_to admin_post_image_path(post_image.id) do %>
+                        <%= image_tag post_image.get_image(300,300) %>
+                    <% end %>
+                </div>
+            </div>
+
+            <div class="col-8">
+                <div>
+                    <%= image_tag post_image.user.get_profile_image(100,70) %>
+                </div>
+
+                <div class="mb-4">
+                    <%= link_to admin_user_path(post_image.user_id) do %>
+                        <%= post_image.user.name %>
+                    <% end %>
+                </div>
+                <div>
+                    <%= post_image.body %>
+                </div>
+                <!--タグリスト-->
+                <div>
+                    <% post_image.tags.each do |tag| %>
+                        <i class="fa-sharp fa-solid fa-tag"></i>
+                        <%= link_to tag.name, admin_tags_path %>
+                        <%= "(#{tag.post_images.count})" %>
+                    <% end %>
+                </div>
+                <div>
+                    <i class="fa-solid fa-heart-circle-plus"></i>いいね数×<%= post_image.favorites.count %>件
+                </div>
+                <div>
+                    <i class="fa-solid fa-comment"></i>コメント件数×<%= post_image.post_comments.count %>件
+                </div>
+                <div>
+                    <i class="fa-solid fa-location-dot"></i><%= post_image.address %>
+                </div>
+            </div>
+        </div>
     <% end %>
-  </p>
-    <p>
-        いいね数×<%= post_image.favorites.count %>
-    </p>
-  <p>コメント件数:<%= post_image.post_comments.count %></p>
-  <p><%= link_to admin_user_path(post_image.user_id) do %>
-       <%= post_image.user.name %>
-     <% end %>
-  </p>
-  <p><%= post_image.body %></p>
-  <!--タグリスト-->
-  <p>
-    <% post_image.tags.each do |tag| %>
-    <i class="fa-sharp fa-solid fa-tag"></i>
-      <%= link_to tag.name, admin_tags_path %>
-      <%= "(#{tag.post_images.count})" %>
-    <% end %>
-  </p>
-  <span><i class="fa-solid fa-location-dot"></i> <%= post_image.address %></span>
-<% end %>
+</div>
