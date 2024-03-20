@@ -30,7 +30,7 @@
                     <span>コメント件数:<%= @post_image.post_comments.count %></span>
                 </span>
                     <% if @post_image.user_id == current_user.id %>
-                        <span><%= link_to "編集する", edit_post_image_path, class:"btn btn-success" %></span>
+                        <span><%= link_to "編集する", edit_post_image_path, class:"btn btn-primary" %></span>
                         <span><%= link_to "削除する", post_image_path(@post_image), method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger" %></span>
                     <% end %>
                 <div class="mt-3 mb-3"><%= @post_image.body %></div>
@@ -57,7 +57,7 @@
                     <%= post_comment.comment %>
                     <%= post_comment.created_at.strftime('%Y/%m/%d') %>
                     <% if post_comment.user == current_user %>
-                        <%= link_to "削除する", post_image_post_comment_path(post_comment.post_image, post_comment), method: :delete, data: { confirm: "削除してもよろしいですか？" }  %>
+                        <%= link_to "削除する", post_image_post_comment_path(post_comment.post_image, post_comment), method: :delete, data: { confirm: "削除してもよろしいですか？" }, class:"btn btn-danger" %>
                     <% end %>
                 </span>
             </div>

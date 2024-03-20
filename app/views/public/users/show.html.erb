@@ -24,7 +24,7 @@
                     <% if @user.id == current_user.id %>
                     <tr>
                         <td></td>
-                        <td><%= link_to "いいね一覧", favorites_user_path(@user) %></td>
+                        <td><%= link_to "いいね一覧", favorites_user_path(@user), class:"btn btn-primary" %></td>
                     </tr>
                     <% end %>
                 </tbody>
