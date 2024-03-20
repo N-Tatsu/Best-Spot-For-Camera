@@ -1,7 +1,25 @@
-<h1>User</h1>
-<% @users.each do |user| %>
-  <%= image_tag user.get_profile_image(100,100) %>
-  <%= user.name%>
-  <%= user.introduction%>
-  <%= link_to "詳細を見る", user_path(user.id) %>
-<% end %>
+<div class="container">
+    <h2 class="text-center p-5"><i class="fa-solid fa-users"></i>登録ユーザー一覧</h2>
+
+    <% @users.each do |user| %>
+    <table class="table">
+        <thead class="table-success">
+            <tr>
+                <th>プロフィール写真</th>
+                <th>ユーザー名</th>
+                <th>ひと言</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td><%= image_tag user.get_profile_image(100,100) %></td>
+                <td><%= user.name%></td>
+                <td><%= user.introduction%></td>
+                <td><%= link_to "詳細を見る", user_path(user.id) %></td>
+            </tr>
+        </tbody>
+    </table>
+    <% end %>
+</div>
