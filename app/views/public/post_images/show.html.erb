@@ -27,7 +27,7 @@
                         <% end %>
                     <% end %>
                     <!--コメント数-->
-                    <span>コメント件数:<%= @post_image.post_comments.count %></span>
+                    <span><i class="fa-solid fa-comment"></i>コメント件数:<%= @post_image.post_comments.count %></span>
                 </span>
                     <% if @post_image.user_id == current_user.id %>
                         <span><%= link_to "編集する", edit_post_image_path, class:"btn btn-primary" %></span>
@@ -54,6 +54,7 @@
                     <%= post_comment.user.name %>
                 </span>
                 <span>
+                    <i class="fa-solid fa-comment"></i>
                     <%= post_comment.comment %>
                     <%= post_comment.created_at.strftime('%Y/%m/%d') %>
                     <% if post_comment.user == current_user %>
