@@ -1,26 +1,39 @@
-<h1>投稿詳細</h1>
+<div class="container">
+    <h2 class="text-center p-5"><i class="fa-solid fa-camera"></i>ユーザー投稿情報詳細</h2>
 
-<%= image_tag @post_image.get_image(200,200) %>
-<p>いいね数×<%= @post_image.favorites.count %></p>
-<p>コメント数×<%= @post_image.post_comments.count %></p>
-<% @post_image.post_comments.each do |post_comment| %>
-  <%= post_comment.user.name %>
-  <%= post_comment.created_at.strtime('%Y/%m/%d') %><%= post_comment.comment %>
-<% end %>
+    <div class="row">
+        <div class="col-5 mb-5">
+            <div class="mb-3">
+              <%= image_tag @post_image.user.get_profile_image(50,50) %>
+              <%= link_to @post_image.user.name, admin_user_path(@post_image.user_id) %>
+            </div>
+            <div class="mb-3">
+                <%= image_tag @post_image.get_image(470,310) %>
+            </div>
+        </div>
 
-<p><%= link_to @post_image.user.name, admin_user_path(@post_image.user_id) %></p>
-<p><%= @post_image.body %></p>
-<!--タグリスト-->
-<p>
-  <% @post_image.tags.each do |tag| %>
-  <i class="fa-sharp fa-solid fa-tag"></i>
-  <%= link_to tag.name, admin_tags_path %>
-  <% end %>
-</p>
-<p><i class="fa-solid fa-location-dot"></i><%= @post_image.address %></p>
+      <div class="col-5">
+          <p>いいね数×<%= @post_image.favorites.count %></p>
+          <p>コメント数×<%= @post_image.post_comments.count %></p>
+           <% @post_image.post_comments.each do |post_comment| %>
+              <%= post_comment.user.name %>
+             <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
+           <% end %>
+         <p><%= @post_image.body %></p>
+         <!--タグリスト-->
+          <p>
+             <% @post_image.tags.each do |tag| %>
+                   <i class="fa-sharp fa-solid fa-tag"></i>
+               <%= link_to tag.name, admin_tags_path %>
+            <% end %>
+          </p>
+           <p><i class="fa-solid fa-location-dot"></i><%= @post_image.address %></p>
+     </div>
+    </div>
+
 
 <div class="container">
   <div id="map"></div>
 </div>
-
+</div>
 <%= javascript_pack_tag 'map', 'data-turbolinks-track': 'reload' %>
