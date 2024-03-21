@@ -13,56 +13,70 @@
             <div class="mb-3">
                 <%= image_tag @post_image.image, size: "470x310" %>
             </div>
-            <!--いいねボタン-->
-            <div>
-                <span>
-                    <% if @post_image.favorited_by?(current_user) %>
-                        <%= link_to post_image_favorite_path(@post_image), method: :delete do %>
-                            <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>×
-                            <%= @post_image.favorites.count %> いいね
+            <table class="table table-borderless">
+                <tbody class="text-left">
+                    <tr>
+                        <td colspan="2"><%= @post_image.body %></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <% @post_image.tags.each do |tag| %>
+                                <i class="fa-sharp fa-solid fa-tag"></i>
+                                <%= link_to tag.name, search_tag_path(tag_id: tag.id) %>
+                            <% end %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><i class="fa-solid fa-location-dot"></i><%= @post_image.address %></td>
+                    </tr>
+                    <!--いいねボタン-->
+                    <tr>
+                        <% if @post_image.favorited_by?(current_user) %>
+                        <td>
+                            <%= link_to post_image_favorite_path(@post_image), method: :delete do %>
+                                <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>×
+                               <%= @post_image.favorites.count %> いいね
+                            <% end %>
+                        </td>
+                        <% else %>
+                        <td>
+                            <%= link_to post_image_favorite_path(@post_image), method: :post do %>
+                                ♡×<%= @post_image.favorites.count %> いいね
+                            <% end %>
+                        </td>
                         <% end %>
-                    <% else %>
-                        <%= link_to post_image_favorite_path(@post_image), method: :post do %>
-                            ♡×<%= @post_image.favorites.count %> いいね
-                        <% end %>
-                    <% end %>
-                    <!--コメント数-->
-                    <span><i class="fa-solid fa-comment"></i>コメント件数:<%= @post_image.post_comments.count %></span>
-                </span>
+                    </tr>
+                    <tr>
+                        <td><i class="fa-solid fa-comment"></i>コメント件数:<%= @post_image.post_comments.count %></td>
+                    </tr>
                     <% if @post_image.user_id == current_user.id %>
-                        <span><%= link_to "編集する", edit_post_image_path, class:"btn btn-primary" %></span>
-                        <span><%= link_to "削除する", post_image_path(@post_image), method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger" %></span>
+                    <tr>
+                        <td>
+                            <%= link_to "編集する", edit_post_image_path, class:"btn btn-primary" %>
+                            <%= link_to "削除する", post_image_path(@post_image), method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger" %>
+                        </td>
+                    </tr>
                     <% end %>
-                <div class="mt-3 mb-3"><%= @post_image.body %></div>
-                <!--タグリスト-->
-                <div class="mb-3">
-                    <% @post_image.tags.each do |tag| %>
-                        <i class="fa-sharp fa-solid fa-tag"></i>
-                        <%= link_to tag.name, search_tag_path(tag_id: tag.id) %>
-                    <% end %>
-                </div>
-                <span><i class="fa-solid fa-location-dot"></i><%= @post_image.address %></span>
-            </div>
+                </tbody>
+            </table>
         </div>
-
-        <div class="col-5">
-　          <!--コメント一覧-->
-　          <% @post_image.post_comments.each do |post_comment| %>
-            <div class="mb-3">
-                <span class="d-flex">
-                    <%= image_tag post_comment.user.get_profile_image(50,50) %>
-                    <%= post_comment.user.name %>
-                </span>
-                <span>
-                    <i class="fa-solid fa-comment"></i>
-                    <%= post_comment.comment %>
-                    <%= post_comment.created_at.strftime('%Y/%m/%d') %>
-                    <% if post_comment.user == current_user %>
-                        <%= link_to "削除する", post_image_post_comment_path(post_comment.post_image, post_comment), method: :delete, data: { confirm: "削除してもよろしいですか？" }, class:"btn btn-danger" %>
-                    <% end %>
-                </span>
-            </div>
-            <% end %>
+        <div class="col-6">
+　          <h4 class="text-center"><i class="fa-solid fa-comments"></i>コメント欄</h4>
+　          <table class="table">
+　              <tbody class="text-center">
+　                  <% @post_image.post_comments.each do |post_comment| %>
+　                  <tr>
+　                      <td><%= image_tag post_comment.user.get_profile_image(50,50) %>
+　                      <%= post_comment.user.name %></td>
+　                      <td><%= post_comment.comment %></td>
+　                      <td><%= post_comment.created_at.strftime('%Y/%m/%d') %></td>
+　                      <% if post_comment.user == current_user %>
+　                          <td><%= link_to "削除する", post_image_post_comment_path(post_comment.post_image, post_comment), method: :delete, data: { confirm: "削除してもよろしいですか？" }, class:"btn btn-danger" %></td>
+　                      <% end %>
+　                  </tr>
+　                   <% end %>
+　              </tbody>
+　          </table>
             <!--コメントフォーム-->
             <div>
                 <%= form_with model: [@post_image,@post_comment] do |f| %>
