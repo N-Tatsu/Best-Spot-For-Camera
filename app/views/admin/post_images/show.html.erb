@@ -10,36 +10,48 @@
             <div class="mb-3">
                 <%= image_tag @post_image.get_image(470,310) %>
             </div>
+
+            <table class="table table-borderless">
+                <tbody class="text-left">
+                    <tr>
+                        <td colspan="2"><%= @post_image.body %></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><i class="fa-solid fa-location-dot"></i><%= @post_image.address %></td>
+                    </tr>
+                    <!--タグリスト-->
+                    <tr>
+                        <td colspan="2">
+                            <% @post_image.tags.each do |tag| %>
+                                <i class="fa-sharp fa-solid fa-tag"></i>
+                                <%= link_to tag.name, admin_tags_path %>
+                            <% end %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><i class="fa-solid fa-heart-circle-plus"></i>いいね数×<%= @post_image.favorites.count %>件</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><i class="fa-solid fa-comment"></i>コメント数×<%= @post_image.post_comments.count %>件</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
-        <div class="col-5">
-            <div class="mt-5 mb-3"><%= @post_image.body %></div>
-            <!--タグリスト-->
-            <div>
-                <% @post_image.tags.each do |tag| %>
-                    <i class="fa-sharp fa-solid fa-tag"></i>
-                    <%= link_to tag.name, admin_tags_path %>
-                <% end %>
-            </div>
-            <div><i class="fa-solid fa-location-dot"></i><%= @post_image.address %></div>
-            <div><i class="fa-solid fa-heart-circle-plus"></i>いいね数×<%= @post_image.favorites.count %>件</div>
-            <div class= "mb-3"><i class="fa-solid fa-comment"></i>コメント数×<%= @post_image.post_comments.count %>件</div>
-            <div>
-                <div>
-                    <table class="table">
-                        <tbody class="text-center">
-                            <% @post_image.post_comments.each do |post_comment| %>
-                            <tr>
-                                <td><%= image_tag post_comment.user.get_profile_image(50,50) %></td>
-                                <td><%= post_comment.user.name %></td>
-                                <td><%= post_comment.comment %></td>
-                                <td><%= post_comment.created_at.strftime('%Y/%m/%d') %></td>
-                            </tr>
-                            <% end %>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+        <div class="col-6">
+            <h4 class="text-center p-3"><i class="fa-solid fa-comments"></i>コメント欄</h4>
+            <table class="table">
+                <tbody class="text-center">
+                    <% @post_image.post_comments.each do |post_comment| %>
+                    <tr>
+                        <td><%= image_tag post_comment.user.get_profile_image(50,50) %></td>
+                        <td><%= post_comment.user.name %></td>
+                        <td><%= post_comment.comment %></td>
+                        <td><%= post_comment.created_at.strftime('%Y/%m/%d') %></td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
         </div>
     </div>
     <!--地図-->

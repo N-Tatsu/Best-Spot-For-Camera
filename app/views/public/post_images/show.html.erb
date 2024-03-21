@@ -11,7 +11,7 @@
               <%= link_to @post_image.user.name, user_path(@post_image.user_id) %>
             </div>
             <div class="mb-3">
-                <%= image_tag @post_image.image, size: "470x310" %>
+                <%= image_tag @post_image.get_image(470,310) %>
             </div>
             <table class="table table-borderless">
                 <tbody class="text-left">
