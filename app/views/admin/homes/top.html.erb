@@ -24,6 +24,9 @@
                 <div>
                     <%= post_image.body %>
                 </div>
+                <div>
+                    <i class="fa-solid fa-location-dot"></i><%= post_image.address %>
+                </div>
                 <!--タグリスト-->
                 <div>
                     <% post_image.tags.each do |tag| %>
@@ -37,9 +40,6 @@
                 </div>
                 <div>
                     <i class="fa-solid fa-comment"></i>コメント件数×<%= post_image.post_comments.count %>件
-                </div>
-                <div>
-                    <i class="fa-solid fa-location-dot"></i><%= post_image.address %>
                 </div>
             </div>
         </div>
