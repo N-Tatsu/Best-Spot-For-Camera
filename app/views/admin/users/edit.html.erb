@@ -1,17 +1,38 @@
-<h1><%= @user.name %>さんのアカウント管理</h1>
+<div class="container">
+    <h2 class="text-center p-5"><i class="fa-solid fa-gear"></i><%= @user.name %>さんのアカウント管理</h2>
 
-<%= form_with model: @user, url: admin_user_path(@user.id), method: :patch, local: true do |f| %>
-  <%= f.label :image %>
-  <%= f.file_field :image, accept: 'image/*' %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :introduction %>
-  <%= f.text_field :introduction %>
-  <%= f.label :email %>
-  <%= @user.email %>
-  <!--ステータス -->
-  <%= f.label :user_status %>
-  <%= f.select :is_deleted, [['有効', true], ['退会済み', false]], {}, { class: 'form-control' } %>
-  <%#= f.select :is_deleted, [['有効', false], ['退会済み', true]], {}, { class: 'form-control' } %>
-  <%= f.submit "変更内容を保存" %>
-<% end %>
+    <div class="row">
+        <%= form_with model: @user, url: admin_user_path(@user.id), method: :patch, local: true do |f| %>
+        <div class="col-md-8 mb-3">
+            <label class="form-label">プロフィール写真</label>
+            <span class="text-danger">*</span>
+            <%= f.file_field :profile_image, accept: 'image/*' %>
+        </div>
+
+         <div class="col-md-12 mb-3">
+            <label class="form-label">ユーザー名</label>
+         　　<span class="text-danger">*</span>
+         　　<%= f.text_field :name, class: "form-control", placeholder: "ユーザー名" , required: true %>
+        </div>
+
+        <div class="col-md-12 mb-3">
+            <label class="form-label">ひと言</label>
+            <%= f.text_field :introduction, class: "form-control", placeholder: "任意のひと言"  %>
+        </div>
+
+        <div class="col-md-12 mb-3">
+            <label class="form-label">メールアドレス</label>
+            <p><%= @user.email %></p>
+        </div>
+        <!--ステータス -->
+        <div class="col-md-12 mb-3">
+            <label class="form-label">ステータス管理</label>
+            <%= f.select :is_deleted, [['有効', true], ['退会済み', false]], {}, { class: 'form-control' } %>
+        </div>
+
+        <div class="col-md-12 mb-3">
+          　<%= f.submit '変更内容を保存', class:"btn btn-success" %>
+        </div>
+        <% end %>
+    </div>
+</div>
