@@ -1,7 +1,25 @@
-<h1>投稿タグ管理</h1>
+<div class="container">
+    <h2 class="text-center p-5"><i class="fa-solid fa-tags"></i>投稿タグ管理</h1>
 
-<% @tags.each do |tag| %>
-  <i class="fa-sharp fa-solid fa-tag"></i>
-  <%= tag.name %>
-  <%= link_to "削除する", admin_tag_path(tag), method: :delete, data: { confirm: '本当に削除しますか?' }, class: "btn btn-sm btn-danger" %>
-<% end %>
+    <div class="row">
+        <div class="col-6 offset-3">
+            <table class="table text-center">
+                <thead class="table-success">
+                    <tr>
+                        <th><i class="fa-solid fa-tags"></i>タグ名</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @tags.each do |tag| %>
+                        <tr>
+                            <td><%= tag.name %></td>
+                            <td><%= link_to "削除する", admin_tag_path(tag), method: :delete, data: { confirm: '本当に削除しますか?' }, class: "btn btn-sm btn-danger" %></td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+            <%= paginate @tags %>
+        </div>
+    </div>
+</div>
