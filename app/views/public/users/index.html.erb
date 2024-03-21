@@ -13,7 +13,7 @@
         <% @users.each do |user| %>
         <tbody>
             <tr>
-                <td><%= image_tag user.get_profile_image(100,100) %></td>
+                <td><%= image_tag user.get_profile_image(100,100), class:"rounded-top border border-primary" %></td>
                 <td><%= user.name%></td>
                 <td><%= user.introduction%></td>
                 <td><%= link_to "詳細を見る", user_path(user.id), class:"btn btn-primary" %></td>

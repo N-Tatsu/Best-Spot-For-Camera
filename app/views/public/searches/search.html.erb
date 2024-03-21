@@ -13,7 +13,7 @@
         <tbody>
             <% @records.each do |record| %>
             <tr>
-                <td><%= image_tag record.get_profile_image(100,100) %></td>
+                <td><%= image_tag record.get_profile_image(100,100), class:"rounded-top border border-primary" %></td>
                 <td><%= record.name %></td>
                 <td><%= record.introduction %></td>
                 <td><%= link_to "詳細を見る", user_path(record), class: "btn btn-primary" %></td>

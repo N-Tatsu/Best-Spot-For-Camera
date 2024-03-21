@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-5 mb-5">
             <div class="mb-3">
-              <%= image_tag @post_image.user.get_profile_image(50,50) %>
+              <%= image_tag @post_image.user.get_profile_image(60,60), class:"rounded-top border border-primary" %>
               <%= link_to @post_image.user.name, admin_user_path(@post_image.user_id) %>
             </div>
             <div class="mb-3">
@@ -44,7 +44,7 @@
                 <tbody class="text-center">
                     <% @post_image.post_comments.each do |post_comment| %>
                     <tr>
-                        <td><%= image_tag post_comment.user.get_profile_image(50,50) %></td>
+                        <td><%= image_tag post_comment.user.get_profile_image(50,50), class:"rounded-top border border-primary" %></td>
                         <td><%= post_comment.user.name %></td>
                         <td><%= post_comment.comment %></td>
                         <td><%= post_comment.created_at.strftime('%Y/%m/%d') %></td>

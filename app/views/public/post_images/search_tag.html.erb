@@ -25,7 +25,7 @@
 
             <div class="col-lg-8">
                 <div>
-                    <%= image_tag post_image.user.get_profile_image(100,70) %>
+                    <%= image_tag post_image.user.get_profile_image(60,60), class:"rounded-top border border-primary" %>
                 </div>
                 <div class="mb-4">
                     <%= link_to post_image.user.name, user_path(post_image.user.id) %>
