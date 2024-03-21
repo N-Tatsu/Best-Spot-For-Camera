@@ -45,11 +45,12 @@
                 <div class="d-flex mt-5">
                     <div>
                        <%= link_to post_image_path(post_image.id) do %>
-                          <%= image_tag post_image.image, size: "300x180" %>
+                          <%= image_tag post_image.get_image(300,180) %>
                        <% end %>
                     </div>
-                    <div class="mx-5 my-5">
+                    <div class="mx-5 my-3">
                         <p><%= post_image.body %></p>
+                        <p><i class="fa-solid fa-location-dot"></i><%= post_image.address %></p>
                         <p><i class="fa-solid fa-heart-circle-plus"></i>いいね×<%= post_image.favorites.count %>件</p>
                         <p><i class="fa-solid fa-comment"></i>コメント数×<%= post_image.post_comments.count %>件</p>
                     </div>

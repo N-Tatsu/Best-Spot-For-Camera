@@ -1,18 +1,51 @@
-<h1><%= @user.name %>さんのページ</h1>
-<p><%= image_tag @user.get_profile_image(100,100) %></p>
-<p><%= @user.name %></p>
-<p><%= @user.introduction %></p>
-<p><%= link_to edit_admin_user_path(@user),class: "btn btn-outline-secondary btn-block edit_user_#{@user.id}" do %>
-    <i class="fa-solid fa-user-gear"></i>
-  <% end %>
-</p>
+<div class="container">
+    <h2 class="text-center p-5"><i class="fa-solid fa-user"></i><%= @user.name %>さんの情報管理</h2>
 
-<h2><%= @user.name%>さんの投稿履歴</h2>
-<% @post_images. each do |post_image| %>
-  <%= link_to admin_post_image_path(post_image.id) do %>
-    <%= image_tag post_image.get_image(200,200) %>
-  <% end %>
-  <%= post_image.body %>
-  <p>いいね×<%= post_image.favorites.count %></p>
-  <p>コメント数×<%= post_image.post_comments.count %></p>
-<% end %>
+    <div class="row">
+        <div class="col-4">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td><%= image_tag @user.get_profile_image(70,70) %></td>
+                    </tr>
+                    <tr>
+                        <td>ユーザー名</td>
+                        <td><%= @user.name %></td>
+                    </tr>
+                    <tr>
+                        <td>ひと言</td>
+                        <td><%= @user.introduction %></td>
+                    </tr>
+                    <!--管理者の場合は、制限なく設定リンク表示する-->
+                    <tr>
+                        <td colspan="2">
+                            <%= link_to edit_admin_user_path(@user),class: "btn btn-outline-secondary btn-block edit_user_#{@user.id}" do %>
+                                <i class="fa-solid fa-user-gear"></i>
+                            <% end %>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-7 offset-1">
+            <h4 class="text-center"><i class="fa-regular fa-image"></i>投稿履歴</h4>
+            <% @post_images. each do |post_image| %>
+            <div class="d-flex mt-5">
+                <div>
+                    <%= link_to admin_post_image_path(post_image.id) do %>
+                        <%= image_tag post_image.get_image(300,180) %>
+                    <% end %>
+                </div>
+                <div class="mx-5 my-3">
+                    <p><%= post_image.body %></p>
+                    <p><i class="fa-solid fa-location-dot"></i><%= post_image.address %></p>
+                    <p><i class="fa-solid fa-heart-circle-plus"></i>いいね×<%= post_image.favorites.count %>件</p>
+                    <p><i class="fa-solid fa-comment"></i>コメント数×<%= post_image.post_comments.count %>件</p>
+                </div>
+            </div>
+            <% end %>
+        </div>
+    </div>
+</div>
