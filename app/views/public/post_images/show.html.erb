@@ -5,7 +5,7 @@
     <% end %>
 
     <div class="row">
-        <div class="col-6 mb-5">
+        <div class="col-lg-6 mb-5">
             <div class="mb-3">
               <%= image_tag @post_image.user.get_profile_image(50,50) %>
               <%= link_to @post_image.user.name, user_path(@post_image.user_id) %>
@@ -60,7 +60,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-6">
+        <div class="col-lg-6">
 　          <h4 class="text-center"><i class="fa-solid fa-comments"></i>コメント欄</h4>
 　          <table class="table">
 　              <tbody class="text-center">

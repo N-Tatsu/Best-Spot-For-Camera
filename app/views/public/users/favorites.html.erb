@@ -3,7 +3,7 @@
 
     <% @favorites_post_images.each do |post_image| %>
     <div class="row d-flex flex-wrap mb-5">
-        <div class="col-4">
+        <div class="col-lg-4">
             <div>
                 <%= link_to  post_image_path(post_image) do %>
                     <%= image_tag post_image.get_image(320,480), class:"img-rounded img-responsive" %>
@@ -11,7 +11,7 @@
             </div>
         </div>
 
-        <div class="col-8">
+        <div class="col-lg-8">
             <div>
                 <%= image_tag post_image.user.get_profile_image(100,70) %>
             </div>

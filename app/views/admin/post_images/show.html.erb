@@ -2,7 +2,7 @@
     <h2 class="text-center p-5"><i class="fa-solid fa-camera"></i>ユーザー投稿情報詳細</h2>
 
     <div class="row">
-        <div class="col-5 mb-5">
+        <div class="col-lg-5 mb-5">
             <div class="mb-3">
               <%= image_tag @post_image.user.get_profile_image(50,50) %>
               <%= link_to @post_image.user.name, admin_user_path(@post_image.user_id) %>
