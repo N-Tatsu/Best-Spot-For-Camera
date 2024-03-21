@@ -25,6 +25,17 @@
                 <% end %>
         </div>
 
+        <div><%= post_image.body %></div>
+        <div><i class="fa-solid fa-location-dot"></i> <%= post_image.address %></div>
+        <!--タグリスト-->
+        <div>
+            <% post_image.tags.each do |tag| %>
+                <i class="fa-sharp fa-solid fa-tag"></i>
+                <%= link_to tag.name, search_tag_path(tag_id: tag.id) %>
+                <%= "(#{tag.post_images.count})" %>
+            <% end %>
+        </div>
+
         <% if post_image.favorited_by?(current_user) %>
         <div>
             <%= link_to post_image_favorite_path(post_image), method: :delete do %>
@@ -40,18 +51,6 @@
         </div>
         <% end %>
         <div><i class="fa-solid fa-comment"></i>コメント件数:<%= post_image.post_comments.count %></div>
-
-        <div><%= post_image.body %></div>
-
-        <!--タグリスト-->
-        <div>
-            <% post_image.tags.each do |tag| %>
-                <i class="fa-sharp fa-solid fa-tag"></i>
-                <%= link_to tag.name, search_tag_path(tag_id: tag.id) %>
-                <%= "(#{tag.post_images.count})" %>
-            <% end %>
-        </div>
-        <div><i class="fa-solid fa-location-dot"></i> <%= post_image.address %></div>
     </div>
 </div>
 <% end %>
