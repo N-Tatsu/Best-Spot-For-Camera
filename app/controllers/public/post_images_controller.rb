@@ -7,6 +7,10 @@ class Public::PostImagesController < ApplicationController
   end
 
   def create
+      if current_user.guest_user?
+          redirect_to post_images_path, alert: "ゲストログインユーザーは投稿できません"
+          return
+      end
       #byebug
       @post_image = PostImage.new(post_image_params)
       @post_image.user_id = current_user.id
