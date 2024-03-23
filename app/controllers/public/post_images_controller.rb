@@ -1,6 +1,6 @@
 class Public::PostImagesController < ApplicationController
 
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :index
 
   def new
       @post_image = PostImage.new
@@ -12,7 +12,7 @@ class Public::PostImagesController < ApplicationController
               #     redirect_to post_images_path, alert: "ゲストログインユーザーは投稿できません"
               #     return
               # end
-      
+
       #byebug
       @post_image = PostImage.new(post_image_params)
       @post_image.user_id = current_user.id
