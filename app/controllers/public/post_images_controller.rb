@@ -89,12 +89,12 @@ class Public::PostImagesController < ApplicationController
   def post_image_params
       params.require(:post_image).permit(:body, :image, :address)
   end
-  
+
   #現在ログインしているユーザーが投稿編集しようとしているユーザーと同じかどうかを確認する
   def ensure_correct_user
-      @user = User.find(params[:id])
-      unless @user == current_user
-          redirect_to user_path(current_user)
+      @post_image = PostImage.find(params[:id])
+      unless @post_image.user.id == current_user.id
+          redirect_to post_images_path, notice: "ユーザー自身の投稿しか編集できません。"
       end
   end
 
