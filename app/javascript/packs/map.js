@@ -34,7 +34,8 @@ async function initMap() {
       content: `
         <div class="information container p-0">
           <div class="mb-3 d-flex align-items-center">
-            <img class="rounded-circle mr-2" src="${item.user.profile_image}" width="40" height="40"><p class="lead m-0 font-weight-bold">${item.user.name}</p>
+
+            <p class="lead m-0 font-weight-bold">${item.user.name}</p>
           </div>
           <div class="mb-3">
             <img class="thumbnail" src="${item.image}" loading="lazy" width="150" height="150">
