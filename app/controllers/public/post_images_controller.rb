@@ -1,6 +1,7 @@
 class Public::PostImagesController < ApplicationController
 
   before_action :authenticate_user!, except: :index
+  before_action :ensure_correct_user, only: [:edit,:update]
 
   def new
       @post_image = PostImage.new
@@ -87,6 +88,14 @@ class Public::PostImagesController < ApplicationController
   private
   def post_image_params
       params.require(:post_image).permit(:body, :image, :address)
+  end
+  
+  #現在ログインしているユーザーが投稿編集しようとしているユーザーと同じかどうかを確認する
+  def ensure_correct_user
+      @user = User.find(params[:id])
+      unless @user == current_user
+          redirect_to user_path(current_user)
+      end
   end
 
 end
