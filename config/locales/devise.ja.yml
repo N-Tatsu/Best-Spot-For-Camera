@@ -1,0 +1,14 @@
+ja:
+  errors:
+    messages:
+      not_saved:
+        one: "1 件のエラーが発生したため %{resource} は保存されませんでした。"
+        other: "%{count} 件のエラーが発生したため %{resource} は保存されませんでした。"
+    attributes:
+      user:
+        name:
+          too_short: "ユーザー名は %{count} 文字以上でなければなりません"
+        email:
+          blank: "メールアドレスを入力してください"
+        password:
+          blank: "パスワードを入力してください"
