@@ -7,12 +7,12 @@
         <div class="col-md-8 mb-3">
             <label class="form-label">ユーザー名</label>
             <span class="text-danger">*</span>
-            <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", required: true  %>
         </div>
         <div class="col-md-8 mb-3">
             <label class="form-label">メールアドレス</label>
             <span class="text-danger">*</span>
-            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true  %>
         </div>
         <div class="col-md-8 mb-3">
             <label class="form-label">パスワード</label>
@@ -20,12 +20,12 @@
             <% if @minimum_password_length %>
                 <em>(<%= @minimum_password_length %> 文字以上)</em>
             <% end %>
-            <%= f.password_field :password, autocomplete: "new-password" %>
+            <%= f.password_field :password, autocomplete: "new-password", required: true  %>
         </div>
         <div class="col-md-8 mb-3">
             <label class="form-label">パスワード（確認用）</label>
             <span class="text-danger">*</span>
-            <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true  %>
         </div>
         <div class="col-md-8 mb-3">
             <%= render "public/shared/links" %>
