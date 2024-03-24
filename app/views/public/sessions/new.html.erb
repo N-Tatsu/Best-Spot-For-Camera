@@ -9,12 +9,12 @@
             <div class="col-md-8 mb-3">
                 <label class="form-label">メールアドレス</label>
                 <span class="text-danger">*</span>
-                <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true  %>
             </div>
             <div class="col-md-8 mb-3">
                 <label class="form-label">パスワード</label>
                 <span class="text-danger">*</span>
-                <%= f.password_field :password, autocomplete: "current-password" %>
+                <%= f.password_field :password, autocomplete: "current-password", required: true  %>
             </div>
             <% if devise_mapping.rememberable? %>
             <div class="col-md-8 mb-3">
