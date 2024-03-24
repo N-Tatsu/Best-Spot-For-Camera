@@ -1,5 +1,5 @@
 // javascriptでも環境変数を読み込むため
-require("dotenv").config(); 
+require("dotenv").config();
 
 const { environment } = require('@rails/webpacker')
 
@@ -9,8 +9,8 @@ const webpack = require('webpack')
 environment.plugins.prepend(
   'Provide',
   new webpack.ProvidePlugin({
-    $: "jquery",
-    jQuery: "jquery",
+    $: 'jquery',
+    jQuery: 'jquery',
     Popper: 'popper.js'
   })
 )

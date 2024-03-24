@@ -42,7 +42,7 @@ class Public::PostImagesController < ApplicationController
       end
       format.json do
         @user = User.all
-        @post_images = PostImage.page(params[:page])
+        @post_images = PostImage.all
       end
     end
   end
