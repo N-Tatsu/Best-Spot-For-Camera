@@ -1,6 +1,6 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_correct_user, only: [:edit,:update]
+  before_action :ensure_correct_user, only: [:edit,:update, :favorites]
   before_action :ensure_guest_user, only: [:edit]
 
   def index
@@ -56,7 +56,7 @@ class Public::UsersController < ApplicationController
   def ensure_correct_user
     @user = User.find(params[:id])
     unless @user == current_user
-      redirect_to user_path(current_user), notice: "ユーザー自身のプロフィールしか編集できません。"
+      redirect_to user_path(current_user), notice: "ユーザー自身の情報しか取得できません。"
     end
   end
 
