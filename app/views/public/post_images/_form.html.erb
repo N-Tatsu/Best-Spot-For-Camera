@@ -1,0 +1,62 @@
+<% flash.each do |message_type, message| %>
+    <div class="flash-message" <%= message_type %>><%= message %></div>
+<% end %>
+
+<div class="row">
+    <%= form_with model: post_image do |f| %>
+    <div class="col-md-8 mb-3">
+        <label class="form-label">投稿写真</label>
+        <span class="text-danger">*</span>
+        <%= f.file_field :image,accept: "image/*", required: true %>
+    </div>
+
+    <div class="col-md-12 mb-3">
+        <label class="form-label">タイトル/投稿本文</label>
+     　　<span class="text-danger">*</span>
+     　　<%= f.text_field :body, class: "form-control", placeholder: "タイトルまたは投稿本文" , required: true %>
+    </div>
+
+    <div class="col-md-12 mb-3">
+        <label class="form-label">タグ</label>
+        　<span class="text-danger">*</span>
+        <label>(「、」で区切るとタグを複数登録)</label>
+        <% if post_image.persisted?%>
+            <!--編集画面の時は登録されているタグを表示-->
+            <%= f.text_field :name, class: 'form-control', placeholder: "タグ", value: tag_list, required: true %>
+        <% else %>
+            <!--新規投稿の時はタグは空欄-->
+            <%= f.text_field :name, class: 'form-control', placeholder: "タグ欄", required: true %>
+        <% end %>
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <label class="form-label">郵便番号</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" aria-hidden="true"><i class="fa-solid fa-tenge-sign"></i></span>
+            </div>
+            <%= text_field_tag :zipcode, nil, class: "form-control", placeholder: "郵便番号" %>
+        </div>
+    </div>
+
+    <div class="col-md-12 mb-3">
+        <label class="form-label">住所</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" aria-hidden="true"><i class="fa-solid fa-location-dot"></i></span>
+            </div>
+            <%= f.text_field :address, class: "form-control", placeholder: "住所" %>
+        </div>
+    </div>
+
+    <div class="col-md-12 mb-3">
+        <% if post_image.persisted?%>
+            <!--編集画面の時のボタン-->
+            <%= f.submit '編集を保存する' %>
+        <% else %>
+            <!--投稿画面の時のボタン-->
+            <%= f.submit '投稿する' %>
+        <% end %>
+    </div>
+    <% end %>
+</div>

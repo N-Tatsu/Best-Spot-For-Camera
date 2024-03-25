@@ -1,62 +1,7 @@
 <div class="container">
     <h2 class="text-center p-5"><i class="fa-regular fa-image"></i>新規投稿</h2>
-    <%= flash.now[:alert] %>
-    <% if @post_image.errors.any? %>
-        <%= @post_image.errors.count %>件のエラーが発生しました %>
-        <ul>
-            <% @post_image.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-            <% end %>
-        </ul>
-    <% end %>
-
-
-    <div class="row">
-        <%= form_with model: @post_image, url: post_images_path, method: :post do |f| %>
-            <div class="col-md-8 mb-3">
-                <label class="form-label">投稿写真</label>
-                <span class="text-danger">*</span>
-                <%= f.file_field :image,accept: "image/*", required: true %>
-        　　</div>
-
-        　　<div class="col-md-12 mb-3">
-                <label class="form-label">タイトル/投稿本文</label>
-         　　     <span class="text-danger">*</span>
-         　　     <%= f.text_field :body, class: "form-control", placeholder: "タイトルまたは投稿本文" , required: true %>
-            </div>
-
-            <div class="col-md-12 mb-3">
-                <label class="form-label">タグ</label>
-            　  <span class="text-danger">*</span>
-                <label>(「、」で区切るとタグを複数登録)</label>
-                <%= f.text_field :name, class: 'form-control', placeholder: "タグ欄", required: true %>
-            </div>
-
-            <div class="col-md-6 mb-3">
-                <label class="form-label">郵便番号</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" aria-hidden="true"><i class="fa-solid fa-tenge-sign"></i></span>
-                    </div>
-                    <%= text_field_tag :zipcode, nil, class: "form-control", placeholder: "郵便番号" %>
-                </div>
-            </div>
-
-            <div class="col-md-12 mb-3">
-                <label class="form-label">住所</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" aria-hidden="true"><i class="fa-solid fa-location-dot"></i></span>
-                    </div>
-                    <%= f.text_field :address, class: "form-control", placeholder: "住所" %>
-                </div>
-            </div>
-
-            <div class="col-md-12 mb-3">
-               <%= f.submit '投稿する' %>
-            </div>
-        <% end %>
-    </div>
+    <!--投稿フォームは部分テンプレート-->
+    <%= render 'public/post_images/form', post_image: @post_image %>
 </div>
 <%= javascript_pack_tag "jpostal",  'data-turbolinks-track': 'reload' %>
 

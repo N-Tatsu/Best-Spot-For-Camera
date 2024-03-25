@@ -35,8 +35,7 @@
                 <%= "(#{tag.post_images.count})" %>
             <% end %>
         </div>
-
-
+        <!--いいねボタン部分テンプレート-->
         <div id="favorite_btn_<%= post_image.id %>">
            <%= render 'public/favorites/favorite_btn', post_image: post_image%>
         </div>
