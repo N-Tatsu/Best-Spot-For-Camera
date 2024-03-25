@@ -63,9 +63,9 @@ class Public::PostImagesController < ApplicationController
       @post_image = PostImage.find(params[:id])
       tag_list=params[:post_image][:name].split('、')
       if @post_image.update(post_image_params)
-         @post_image.save_tags(tag_list)
-         flash[:notice] = "投稿内容を変更しました"
-         redirect_to post_image_path(@post_image)
+          @post_image.save_tags(tag_list)
+          flash[:notice] = "投稿内容を変更しました"
+          redirect_to post_image_path(@post_image)
       else
         flash.now[:alert] = "投稿内容を変更できていません"
         render :edit
