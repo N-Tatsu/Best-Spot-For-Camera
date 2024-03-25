@@ -7,7 +7,13 @@
     <div class="col-md-8 mb-3">
         <label class="form-label">投稿写真</label>
         <span class="text-danger">*</span>
-        <%= f.file_field :image,accept: "image/*", required: true %>
+        <% if post_image.persisted?%>
+            <!--編集画面の時は画像は入れなくても編集可能-->
+            <%= f.file_field :image,accept: "image/*" %>
+        <% else %>
+            <!--新規投稿時は画像ないと投稿できない-->
+            <%= f.file_field :image,accept: "image/*", required: true %>
+        <% end %>
     </div>
 
     <div class="col-md-12 mb-3">
