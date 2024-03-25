@@ -8,19 +8,19 @@
         <%= form_with model: @user, url: user_path(@user.id), method: :patch do |f| %>
         <div class="col-md-8 mb-3">
             <label class="form-label">プロフィール写真</label>
-            <span class="text-danger">*</span>
+            <span class="text-danger"></span>
             <%= f.file_field :profile_image, accept: 'image/*' %>
         </div>
 
         <div class="col-md-12 mb-3">
-            <label class="form-label">ユーザー名</label>
+            <label class="form-label">ユーザー名（2〜20文字以内）</label>
          　　<span class="text-danger">*</span>
-         　　<%= f.text_field :name, class: "form-control", placeholder: "ユーザー名" , required: true %>
+         　　<%= f.text_field :name, class: "form-control", placeholder: "2〜20文字以内" , required: true %>
         </div>
 
         <div class="col-md-12 mb-3">
             <label class="form-label">ひと言（50文字以内）</label>
-            <%= f.text_field :introduction, class: "form-control", placeholder: "任意のひと言" %>
+            <%= f.text_field :introduction, class: "form-control", placeholder: "任意" %>
         </div>
 
         <% if @user == current_user %>
