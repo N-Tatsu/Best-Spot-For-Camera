@@ -33,7 +33,7 @@
 ## 開発環境
 OS：Linux(CentOS)
 
-言語：HTML,CSS,JavaScript,Ruby,SQL
+言語：HTML,CSS,JavaScript,ruby,SQL
 
 フレームワーク：Ruby on Rails
 
@@ -41,7 +41,23 @@ JSライブラリ：jQuery
 
 IDE：Cloud9
 
+AWS
+
+ ・VPC
+
+ ・EC2
+
+ ・RDS
+
 ## 使用素材
 <!--- 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。-->
+・ユーザープロフィール画像を設定していない場合のプロフィール写真
+
+サービス名：「カクレノ」
+
+URL：https://kotonohaworks.com/free-icons/
 <!--- アプリケーションの実装に使用したgem/bootstrapのリファレンスなどの記載は不要です。-->
 <!--- 使用しない場合は、使用素材の項目をREADMEから削除してください。-->
+
+
+![スクリーンショット 2024-03-26 12 46 52](https://github.com/N-Tatsu/best-spot-for-camera/assets/153050985/5014031b-8108-47fb-a20f-0d4095b2e6d0)
