@@ -40,10 +40,9 @@ class Public::UsersController < ApplicationController
 
   def favorites
       @user = User.find(params[:id])
-      favorites = Favorite.where(user_id: @user.id).pluck(:post_image_id)  #favoritesに@userがいいねしたpost_imageのIDが格納される
-      post_images = PostImage.find(favorites)   #favorites変数に格納された投稿画像のIDを使用して、対応する投稿画像レコードをデータベースから取得する
-      @favorites_post_images = Kaminari.paginate_array(post_images).page(params[:page]).per(10)  #取得した投稿画像のレコードをページネーション可能な配列に変換
-      # @post_image = PostImage.find(params[:id])
+      favorites = Favorite.where(user_id: @user.id).pluck(:post_image_id)
+      post_images = PostImage.find(favorites)
+      @favorites_post_images = Kaminari.paginate_array(post_images).page(params[:page]).per(10)
   end
 
 

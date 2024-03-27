@@ -2,9 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 
-  #ユーザー名を2文字以上20文字以内、一意性のバリデーション
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
-  #自己紹介を５０以下のバリデーション
   validates :introduction, length: { maximum: 50 }
 
   devise :database_authenticatable, :registerable,
@@ -15,20 +13,15 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :post_comments, dependent: :destroy
 
-  # sessions_controller.rbで記述したUser.guestのguestメソッドを定義してあげる
-  # find_or_create_byは、データの検索と作成を自動的に判断して処理を行う、Railsのメソッド
-  # 「!」を付与することで、処理がうまくいかなかった場合にエラーが発生するようになり、結果不具合を検知しやすくなる
-  # SecureRandom.urlsafe_base64は、ランダムな文字列を生成するRubyのメソッドの一種
+ #ゲストログイン用のゲストログイン用のメールアドレス・パスワード・ユーザー名を設定
   GUEST_USER_EMAIL = "guest@example.com"
-
-  #ゲストログイン用のゲストログイン用のメールアドレス・パスワード・ユーザー名を設定
     def self.guest
       find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
         user.password = SecureRandom.urlsafe_base64  #パスワードはランダムで発行
         user.name = "guestuser"
       end
     end
-    
+
     def guest_user?
       email == GUEST_USER_EMAIL
     end
@@ -42,7 +35,7 @@ class User < ApplicationRecord
       profile_image.variant(resize_to_limit: [width, height]).processed
     end
 
-    # "user"を選択した時の検索の流れ
+    # ユーザーの検索
     def self.search_for(content, method)
       if method == 'perfect'
         User.where(name: content)

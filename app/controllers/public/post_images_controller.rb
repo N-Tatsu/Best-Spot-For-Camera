@@ -14,10 +14,8 @@ class Public::PostImagesController < ApplicationController
               #     return
               # end
 
-      #byebug
       @post_image = PostImage.new(post_image_params)
       @post_image.user_id = current_user.id
-      # 受け取った値を,で区切って配列にする
       tag_list = params[:post_image][:name].split('、')
       result = Geocoder.search(params[:post_image][:address]).first
       if result.present?
@@ -79,9 +77,9 @@ class Public::PostImagesController < ApplicationController
   end
 
   def search_tag
-      @tag_list = Tag.all  #検索結果画面でもタグ一覧表示
-      @tag = Tag.find(params[:tag_id])  #検索されたタグを受け取る
-      @post_images = @tag.post_images  #検索されたタグに紐づく投稿を表示
+      @tag_list = Tag.all
+      @tag = Tag.find(params[:tag_id])
+      @post_images = @tag.post_images
   end
 
 
@@ -90,7 +88,7 @@ class Public::PostImagesController < ApplicationController
       params.require(:post_image).permit(:body, :image, :address)
   end
 
-  #現在ログインしているユーザーが投稿編集しようとしているユーザーと同じかどうかを確認する
+  #現在ログインしているユーザーが編集しようとしているユーザーと同じかどうかを確認する
   def ensure_correct_user
       @post_image = PostImage.find(params[:id])
       unless @post_image.user.id == current_user.id
