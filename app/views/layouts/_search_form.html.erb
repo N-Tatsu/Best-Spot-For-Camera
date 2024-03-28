@@ -3,8 +3,8 @@
         <div class="input-group">
             <%= f.text_field :content, class: "form-control", placeholder: "検索ワード" , required: true %>
             <div class="input-group-prepend">
-                <%= f.select :model, options_for_select({"User" => "user", "Tag" => "tag"}) %>
-                <%= f.select :method, options_for_select({"完全一致" => "perfect", "前方一致" => "forward", "後方一致" => "backward", "部分一致" => "partial"}) %>
+                <%= f.select :model, options_for_select({"User" => "user", "Tag" => "tag"}), class: "form-control" %>
+                <%= f.select :method, options_for_select({"完全一致" => "perfect", "前方一致" => "forward", "後方一致" => "backward", "部分一致" => "partial"}), class: "form-control" %>
                 <%= button_tag type: "submit", class: "btn btn-secondary" do %>
                     <i class="fas fa-search text-light"></i>
                 <% end %>
@@ -15,9 +15,9 @@
 <% elsif admin_signed_in? %>
     <%= form_with url: admin_search_path, method: :get, local: true do |f| %>
         <div class="input-group">
-            <%= f.text_field :content, placeholder: "検索ワード" , required: true %>
+            <%= f.text_field :content, class: "form-control", placeholder: "検索ワード" , required: true %>
             <div class="input-group-prepend">
-                <%= f.select :model, options_for_select({"User" => "user", "Tag" => "tag"}) %>
+                <%= f.select :model, options_for_select({"User" => "user", "Tag" => "tag"}), class: "form-control" %>
                 <%= f.select :method, options_for_select({"完全一致" => "perfect", "前方一致" => "forward", "後方一致" => "backward", "部分一致" => "partial"}) %>
                 <%= button_tag type: "submit", class: "btn btn-secondary" do %>
                     <i class="fas fa-search text-light"></i>
