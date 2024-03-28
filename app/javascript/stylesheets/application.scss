@@ -4,3 +4,13 @@
   width: 100%;
   height: calc(100vh - 88px - 179px);
 }
+
+.twitter a {
+  color: black;
+}
+
+.twitter a:hover {
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+  text-decoration: none;
+}
