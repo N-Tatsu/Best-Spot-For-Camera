@@ -13,6 +13,7 @@ import "jquery";
 import "popper.js";
 import "bootstrap";
 import "../stylesheets/application";
+import "script.js";
 window.$ = window.jQuery = require("jquery");
 
 Rails.start()

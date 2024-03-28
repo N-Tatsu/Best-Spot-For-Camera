@@ -2,47 +2,51 @@
     <h2 class="text-center p-5"><i class="fa-solid fa-camera"></i>ユーザー投稿管理一覧</h2>
 
     <% @post_images.each do |post_image| %>
-        <div class="row mb-5">
-            <div class="col-lg-4">
-                <div>
-                    <%= link_to admin_post_image_path(post_image.id) do %>
-                        <%= image_tag post_image.get_image(350,300) %>
-                    <% end %>
-                </div>
-            </div>
-
-            <div class="col-lg-8">
-                <div>
-                    <%= image_tag post_image.user.get_profile_image(60,60), class:"rounded-top border border-primary" %>
+    <div class="card m-3 shadow">
+        <div class="card-body">
+            <div class="row mb-5">
+                <div class="col-lg-4">
+                    <div>
+                        <%= link_to admin_post_image_path(post_image.id) do %>
+                            <%= image_tag post_image.get_image(350,300) %>
+                        <% end %>
+                    </div>
                 </div>
 
-                <div class="mb-4">
-                    <%= link_to admin_user_path(post_image.user_id) do %>
-                        <%= post_image.user.name %>
-                    <% end %>
-                </div>
-                <div>
-                    <%= post_image.body %>
-                </div>
-                <div>
-                    <i class="fa-solid fa-location-dot"></i><%= post_image.address %>
-                </div>
-                <!--タグリスト-->
-                <div>
-                    <% post_image.tags.each do |tag| %>
-                        <i class="fa-sharp fa-solid fa-tag"></i>
-                        <%= link_to tag.name, admin_tags_path %>
-                        <%= "(#{tag.post_images.count})" %>
-                    <% end %>
-                </div>
-                <div>
-                    <i class="fa-solid fa-heart-circle-plus"></i>いいね数×<%= post_image.favorites.count %>件
-                </div>
-                <div>
-                    <i class="fa-solid fa-comment"></i>コメント件数×<%= post_image.post_comments.count %>件
+                <div class="col-lg-8">
+                    <div>
+                        <%= image_tag post_image.user.get_profile_image(60,60), class:"rounded-top border border-primary" %>
+                    </div>
+
+                    <div class="mb-4">
+                        <%= link_to admin_user_path(post_image.user_id) do %>
+                            <%= post_image.user.name %>
+                        <% end %>
+                    </div>
+                    <div>
+                        <%= post_image.body %>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-location-dot"></i><%= post_image.address %>
+                    </div>
+                    <!--タグリスト-->
+                    <div>
+                        <% post_image.tags.each do |tag| %>
+                            <i class="fa-sharp fa-solid fa-tag"></i>
+                            <%= link_to tag.name, admin_tags_path %>
+                            <%= "(#{tag.post_images.count})" %>
+                        <% end %>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-heart-circle-plus"></i>いいね数×<%= post_image.favorites.count %>件
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-comment"></i>コメント件数×<%= post_image.post_comments.count %>件
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
     <% end %>
     <div>
         <%= paginate @post_images %>

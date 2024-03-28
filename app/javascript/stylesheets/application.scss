@@ -1,5 +1,17 @@
 @use '~bootstrap/scss/bootstrap';
 
+*{
+
+margin: 0;
+
+padding: 0;
+
+box-sizing: border-box;
+
+color: #6c6b6b;
+
+}
+
 // @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap')
 header,body,footer {
    font-family: "Kosugi Maru", sans-serif;
@@ -22,3 +34,27 @@ header,body,footer {
   text-decoration: none;
 }
 
+.back-to-top {
+  display: none;
+  position: fixed;
+  right: 5%;
+  bottom: 5%;
+  color: #fff;
+  padding: 2rem;
+  border-radius: 50%;
+  display: inline-block;
+  text-decoration: none;
+}
+.back-to-top::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+  background-color: #333;
+  border-radius: 50%;
+  z-index: -1;
+}
