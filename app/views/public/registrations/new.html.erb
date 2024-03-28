@@ -27,11 +27,12 @@
             <span class="text-danger">*</span>
             <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true  %>
         </div>
-        <div class="col-md-8 mb-3">
-            <%= render "public/shared/links" %>
-        </div>
+
         <div class="col-md-8 mb-3">
             <%= f.submit "登録する", class:"btn btn-success" %>
+        </div>
+         <div class="col-md-8 mb-3">
+            <%= render "public/shared/links" %>
         </div>
         <% end %>
     </div>
