@@ -5,7 +5,9 @@
             <div class="input-group-prepend">
                 <%= f.select :model, options_for_select({"User" => "user", "Tag" => "tag"}) %>
                 <%= f.select :method, options_for_select({"完全一致" => "perfect", "前方一致" => "forward", "後方一致" => "backward", "部分一致" => "partial"}) %>
-                <%= f.submit "検索" %>
+                <%= button_tag type: "submit", class: "btn btn-secondary" do %>
+                    <i class="fas fa-search text-light"></i>
+                <% end %>
             </div>
         </div>
     <% end %>
@@ -17,7 +19,9 @@
             <div class="input-group-prepend">
                 <%= f.select :model, options_for_select({"User" => "user", "Tag" => "tag"}) %>
                 <%= f.select :method, options_for_select({"完全一致" => "perfect", "前方一致" => "forward", "後方一致" => "backward", "部分一致" => "partial"}) %>
-                <%= f.submit "検索" %>
+                <%= button_tag type: "submit", class: "btn btn-secondary" do %>
+                    <i class="fas fa-search text-light"></i>
+                <% end %>
             </div>
         </div>
     <% end %>

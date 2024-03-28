@@ -5,43 +5,48 @@
     <% end %>
 
 <% @post_images.each do |post_image| %>
-<div class="row mb-5">
-    <div class="col-lg-4">
-        <div>
-            <%= link_to post_image_path(post_image.id) do %>
-                <%= image_tag post_image.get_image(320,480), class:"img-rounded img-responsive" %>
-            <% end %>
-        </div>
-    </div>
+<div class="card m-3 shadow">
+    <div class="card-body">
+        <div class="row mb-5">
+            <div class="col-lg-4">
+                <div>
+                    <%= link_to post_image_path(post_image.id) do %>
+                        <%= image_tag post_image.get_image(320,480), class:"img-rounded img-responsive" %>
+                    <% end %>
+                </div>
+            </div>
 
-    <div class="col-lg-8">
-        <div>
-            <%= image_tag post_image.user.get_profile_image(60,60), class:"rounded-top border border-primary" %>
-        </div>
+            <div class="col-lg-8">
+                <div>
+                    <%= image_tag post_image.user.get_profile_image(60,60), class:"rounded-top border border-primary" %>
+                </div>
 
-        <div class="mb-4">
-            <%= link_to user_path(post_image.user_id) do %>
-                <%= post_image.user.name %>
-            <% end %>
-        </div>
+                <div class="mb-4">
+                    <%= link_to user_path(post_image.user_id) do %>
+                        <%= post_image.user.name %>
+                    <% end %>
+                </div>
 
-        <div><%= post_image.body %></div>
-        <div><i class="fa-solid fa-location-dot"></i> <%= post_image.address %></div>
-        <!--タグリスト-->
-        <div>
-            <% post_image.tags.each do |tag| %>
-                <i class="fa-sharp fa-solid fa-tag"></i>
-                <%= link_to tag.name, search_tag_path(tag_id: tag.id) %>
-                <%= "(#{tag.post_images.count})" %>
-            <% end %>
-        </div>
-        <div id="favorite_btn_<%= post_image.id %>">
-           <%= render 'public/favorites/favorite_btn', post_image: post_image%>
-        </div>
+                <div><%= post_image.body %></div>
+                <div><i class="fa-solid fa-location-dot"></i> <%= post_image.address %></div>
+                <!--タグリスト-->
+                <div>
+                    <% post_image.tags.each do |tag| %>
+                        <i class="fa-sharp fa-solid fa-tag"></i>
+                        <%= link_to tag.name, search_tag_path(tag_id: tag.id) %>
+                        <%= "(#{tag.post_images.count})" %>
+                    <% end %>
+                </div>
+                <div id="favorite_btn_<%= post_image.id %>">
+                   <%= render 'public/favorites/favorite_btn', post_image: post_image%>
+                </div>
 
-        <div><i class="fa-solid fa-comment"></i>コメント件数:<%= post_image.post_comments.count %></div>
+                <div><i class="fa-solid fa-comment"></i>コメント件数:<%= post_image.post_comments.count %></div>
+            </div>
+        </div>
     </div>
 </div>
 <% end %>
+
 <%= paginate @post_images, class: "justify-content: center" %>
 </div>
