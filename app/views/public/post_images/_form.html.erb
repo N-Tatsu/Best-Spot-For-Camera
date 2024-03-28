@@ -5,14 +5,14 @@
 <div class="row">
     <%= form_with model: post_image do |f| %>
     <div class="col-md-8 mb-3">
-        <label class="form-label">投稿写真</label>
+        <label class="form-label">投稿写真（拡張子が".jpeg"または".png"）</label>
         <span class="text-danger">*</span>
         <% if post_image.persisted?%>
             <!--編集画面の時は画像は入れなくても編集可能-->
-            <%= f.file_field :image,accept: "image/*" %>
+            <%= f.file_field :image, accept: "image/jpeg, image/png" %>
         <% else %>
             <!--新規投稿時は画像ないと投稿できない-->
-            <%= f.file_field :image,accept: "image/*", required: true %>
+            <%= f.file_field :image, accept: "image/jpeg, image/png", required: true %>
         <% end %>
     </div>
 
