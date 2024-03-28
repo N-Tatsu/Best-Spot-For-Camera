@@ -1,5 +1,12 @@
 @use '~bootstrap/scss/bootstrap';
 
+// @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap')
+header,body,footer {
+   font-family: "Kosugi Maru", sans-serif;
+}
+
+
+
 #map {
   width: 100%;
   height: calc(100vh - 88px - 179px);
@@ -14,3 +21,4 @@
   transition: opacity 0.3s ease;
   text-decoration: none;
 }
+
