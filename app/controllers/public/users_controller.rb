@@ -32,7 +32,7 @@ class Public::UsersController < ApplicationController
   end
 
   def withdraw
-      @user = User.find(current_user.id)
+      @user = current_user
       @user.update(is_deleted: false)
       reset_session
       redirect_to root_path
