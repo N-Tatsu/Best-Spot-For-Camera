@@ -1,7 +1,7 @@
 class Public::PostImagesController < ApplicationController
 
   before_action :authenticate_user!, except: :index
-  before_action :ensure_correct_user, only: [:edit,:update]
+  before_action :ensure_correct_user, only: [:edit,:update, :destroy]
 
   def new
       @post_image = PostImage.new
@@ -92,7 +92,7 @@ class Public::PostImagesController < ApplicationController
   def ensure_correct_user
       @post_image = PostImage.find(params[:id])
       unless @post_image.user.id == current_user.id
-          redirect_to post_images_path, notice: "ユーザー自身の投稿しか編集できません。"
+          redirect_to post_images_path, notice: "ユーザー自身の投稿のみしか編集・削除できません。"
       end
   end
 
