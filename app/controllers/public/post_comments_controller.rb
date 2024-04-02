@@ -1,6 +1,7 @@
 class Public::PostCommentsController < ApplicationController
 
   before_action :authenticate_user!
+  before_action :ensure_correct_user, only: [:destroy]
 
   def create
       post_image = PostImage.find(params[:post_image_id])
@@ -23,6 +24,13 @@ class Public::PostCommentsController < ApplicationController
 
   def post_comment_params
       params.require(:post_comment).permit(:comment)
+  end
+
+  def ensure_correct_user
+    @post_comment = current_user.post_comments.find_by(id: params[:id])
+    unless @post_comment
+      redirect_to post_images_path, notice: "ユーザー自身のコメントのみしか削除できません。"
+    end
   end
 
 end
