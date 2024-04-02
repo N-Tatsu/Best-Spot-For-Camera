@@ -34,6 +34,12 @@
                     <tr>
                         <td colspan="2"><i class="fa-solid fa-comment"></i>コメント数×<%= @post_image.post_comments.count %>件</td>
                     </tr>
+                    <tr>
+                        <td>
+                            <%= link_to "編集する", edit_admin_post_image_path, class:"btn btn-primary" %>
+                            <%= link_to "削除する", post_image_path(@post_image), method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger" %>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
