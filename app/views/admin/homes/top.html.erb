@@ -1,6 +1,10 @@
 <div class="container">
     <h2 class="text-center p-5"><i class="fa-solid fa-camera"></i>ユーザー投稿管理一覧</h2>
 
+<% flash.each do |message_type, message| %>
+    <div class="flash-message" <%= message_type %>><%= message %></div>
+<% end %>
+
     <% @post_images.each do |post_image| %>
     <div class="card m-3 shadow">
         <div class="card-body">

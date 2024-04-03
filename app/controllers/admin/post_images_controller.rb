@@ -12,10 +12,26 @@ class Admin::PostImagesController < ApplicationController
   end
 
   def update
-
+     @post_image = PostImage.find(params[:id])
+      tag_list=params[:post_image][:name].split('、')
+      if @post_image.update(post_image_params)
+         @post_image.save_tags(tag_list)
+         flash[:notice] = "投稿内容を変更しました"
+         redirect_to admin_post_image_path(@post_image)
+      else
+        flash.now[:alert] = "投稿内容を変更できていません"
+        render :edit
+      end
   end
 
   def destroy
 
+  end
+
+
+  private
+
+  def post_image_params
+    params.require(:post_image).permit(:body, :image, :address)
   end
 end

@@ -6,17 +6,12 @@
 
 <div class="row">
     <div class="col-3"></div>
-    <%= form_with model: @post_image do |f| %>
+    <%#= form_with model: @post_image, method: :patch do |f| %>
+    <%= form_with model: @post_image, url: admin_post_image_path(@post_image), method: :patch do |f| %>
     <div class="col-md-8 mb-3">
         <label class="form-label">投稿写真<拡張子が".jpeg（.jpg）"または".png"></label>
         <span class="text-danger">*</span>
-        <% if @post_image.persisted?%>
-            <!--編集画面の時は画像は入れなくても編集可能-->
             <%= f.file_field :image, accept: "image/jpeg, image/png" %>
-        <% else %>
-            <!--新規投稿時は画像ないと投稿できない-->
-            <%= f.file_field :image, accept: "image/jpeg, image/png", required: true %>
-        <% end %>
     </div>
 
     <div class="col-md-12 mb-3">
@@ -29,13 +24,7 @@
         <label class="form-label">タグ</label>
         　<span class="text-danger">*</span>
         <label>(「、」で区切るとタグを複数登録)</label>
-        <% if @post_image.persisted?%>
-            <!--編集画面の時は登録されているタグを表示-->
             <%= f.text_field :name, class: 'form-control', placeholder: "タグ", value: @tag_list, required: true %>
-        <% else %>
-            <!--新規投稿の時はタグは空欄-->
-            <%= f.text_field :name, class: 'form-control', placeholder: "タグ欄", required: true %>
-        <% end %>
     </div>
 
     <div class="col-md-6 mb-3">
@@ -57,15 +46,8 @@
             <%= f.text_field :address, class: "form-control", placeholder: "住所" %>
         </div>
     </div>
-
     <div class="col-md-12 mb-3">
-        <% if @post_image.persisted?%>
-            <!--編集画面の時のボタン-->
             <%= f.submit '編集を保存する' %>
-        <% else %>
-            <!--投稿画面の時のボタン-->
-            <%= f.submit '投稿する' %>
-        <% end %>
     </div>
     <% end %>
 </div>
