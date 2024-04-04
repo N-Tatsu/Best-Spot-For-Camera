@@ -53,12 +53,10 @@ class Public::PostImagesController < ApplicationController
   end
 
   def edit
-      @post_image = PostImage.find(params[:id])
       @tag_list = @post_image.tags.pluck(:name).join(',')
   end
 
   def update
-      @post_image = PostImage.find(params[:id])
       tag_list=params[:post_image][:name].split('、')
       if @post_image.update(post_image_params)
           @post_image.save_tags(tag_list)
