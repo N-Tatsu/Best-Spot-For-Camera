@@ -25,7 +25,9 @@ class Admin::PostImagesController < ApplicationController
   end
 
   def destroy
-
+      post_image = PostImage.find(params[:id])
+      post_image.destroy
+      redirect_to admin_root_path
   end
 
 
