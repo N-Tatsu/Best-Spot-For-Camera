@@ -54,6 +54,7 @@ class Public::SessionsController < Devise::SessionsController
       end
   end
 
+# 管理者側で退会させてあと、ログアウトが済んでいないユーザーもログアウト状態にする
   # def user_state
   #   @user = User.find_by(email: params[:user][:email])
   #   if @user
