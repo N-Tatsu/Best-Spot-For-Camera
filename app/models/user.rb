@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :post_comments, dependent: :destroy
 
- 
+
 
  #ゲストログイン用のゲストログイン用のメールアドレス・パスワード・ユーザー名を設定
   GUEST_USER_EMAIL = "guest@example.com"
@@ -54,5 +54,5 @@ end
 
 
   # def active_for_authentication?
-  #     super && !self.is_deleted
+  #     super && (is_deleted == false)
   # end
